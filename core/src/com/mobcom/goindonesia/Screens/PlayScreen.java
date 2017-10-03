@@ -43,9 +43,11 @@ public class PlayScreen implements Screen {
     private World world;
     private Box2DDebugRenderer box2d;
 
+    private Texture texture;
 
     public PlayScreen(GOIndonesia game){
         this.game = game;
+        texture = new Texture("bg_grasslands.png");
         gameCam = new OrthographicCamera();
         gamePort = new FitViewport(GOIndonesia.V_WIDTH / GOIndonesia.PPM, GOIndonesia.V_HEIGHT / GOIndonesia.PPM, gameCam);
         hud = new Hud(game.batch);
@@ -59,49 +61,49 @@ public class PlayScreen implements Screen {
         world = new World(new Vector2(0, 0), true);
         box2d = new Box2DDebugRenderer();
 
-        BodyDef bodyDef = new BodyDef();
-        PolygonShape shape = new PolygonShape();
-        FixtureDef fixtureDef = new FixtureDef();
-        Body body;
+//        BodyDef bodyDef = new BodyDef();
+//        PolygonShape shape = new PolygonShape();
+//        FixtureDef fixtureDef = new FixtureDef();
+//        Body body;
 
-        for(MapObject object : map.getLayers().get(2).getObjects().getByType(RectangleMapObject.class)){
-            Rectangle rect = ((RectangleMapObject) object).getRectangle();
-
-            bodyDef.type = BodyDef.BodyType.StaticBody;
-            bodyDef.position.set((rect.getX() + rect.getWidth() / 2) / GOIndonesia.PPM, (rect.getY() + rect.getHeight() / 2) / GOIndonesia.PPM);
-
-            body = world.createBody(bodyDef);
-            shape.setAsBox(rect.getWidth() / 2 / GOIndonesia.PPM, rect.getHeight() / 2 / GOIndonesia.PPM);
-
-            fixtureDef.shape = shape;
-            body.createFixture(fixtureDef);
-        }
-
-        for(MapObject object : map.getLayers().get(4).getObjects().getByType(RectangleMapObject.class)){
-            Rectangle rect = ((RectangleMapObject) object).getRectangle();
-
-            bodyDef.type = BodyDef.BodyType.StaticBody;
-            bodyDef.position.set((rect.getX() + rect.getWidth() / 2) / GOIndonesia.PPM, (rect.getY() + rect.getHeight() / 2) / GOIndonesia.PPM);
-
-            body = world.createBody(bodyDef);
-            shape.setAsBox(rect.getWidth() / 2 / GOIndonesia.PPM, rect.getHeight() / 2 / GOIndonesia.PPM);
-
-            fixtureDef.shape = shape;
-            body.createFixture(fixtureDef);
-        }
-
-        for(MapObject object : map.getLayers().get(5).getObjects().getByType(RectangleMapObject.class)){
-            Rectangle rect = ((RectangleMapObject) object).getRectangle();
-
-            bodyDef.type = BodyDef.BodyType.StaticBody;
-            bodyDef.position.set((rect.getX() + rect.getWidth() / 2) / GOIndonesia.PPM, (rect.getY() + rect.getHeight() / 2) / GOIndonesia.PPM);
-
-            body = world.createBody(bodyDef);
-            shape.setAsBox(rect.getWidth() / 2 / GOIndonesia.PPM, rect.getHeight() / 2 / GOIndonesia.PPM);
-
-            fixtureDef.shape = shape;
-            body.createFixture(fixtureDef);
-        }
+//        for(MapObject object : map.getLayers().get(2).getObjects().getByType(RectangleMapObject.class)){
+//            Rectangle rect = ((RectangleMapObject) object).getRectangle();
+//
+//            bodyDef.type = BodyDef.BodyType.StaticBody;
+//            bodyDef.position.set((rect.getX() + rect.getWidth() / 2) / GOIndonesia.PPM, (rect.getY() + rect.getHeight() / 2) / GOIndonesia.PPM);
+//
+//            body = world.createBody(bodyDef);
+//            shape.setAsBox(rect.getWidth() / 2 / GOIndonesia.PPM, rect.getHeight() / 2 / GOIndonesia.PPM);
+//
+//            fixtureDef.shape = shape;
+//            body.createFixture(fixtureDef);
+//        }
+//
+//        for(MapObject object : map.getLayers().get(4).getObjects().getByType(RectangleMapObject.class)){
+//            Rectangle rect = ((RectangleMapObject) object).getRectangle();
+//
+//            bodyDef.type = BodyDef.BodyType.StaticBody;
+//            bodyDef.position.set((rect.getX() + rect.getWidth() / 2) / GOIndonesia.PPM, (rect.getY() + rect.getHeight() / 2) / GOIndonesia.PPM);
+//
+//            body = world.createBody(bodyDef);
+//            shape.setAsBox(rect.getWidth() / 2 / GOIndonesia.PPM, rect.getHeight() / 2 / GOIndonesia.PPM);
+//
+//            fixtureDef.shape = shape;
+//            body.createFixture(fixtureDef);
+//        }
+//
+//        for(MapObject object : map.getLayers().get(5).getObjects().getByType(RectangleMapObject.class)){
+//            Rectangle rect = ((RectangleMapObject) object).getRectangle();
+//
+//            bodyDef.type = BodyDef.BodyType.StaticBody;
+//            bodyDef.position.set((rect.getX() + rect.getWidth() / 2) / GOIndonesia.PPM, (rect.getY() + rect.getHeight() / 2) / GOIndonesia.PPM);
+//
+//            body = world.createBody(bodyDef);
+//            shape.setAsBox(rect.getWidth() / 2 / GOIndonesia.PPM, rect.getHeight() / 2 / GOIndonesia.PPM);
+//
+//            fixtureDef.shape = shape;
+//            body.createFixture(fixtureDef);
+//        }
     }
 
     @Override
@@ -133,9 +135,13 @@ public class PlayScreen implements Screen {
     @Override
     public void render(float delta) {
         update(delta);
-
-        Gdx.gl.glClearColor(0, 0, 0, 1);
+//        Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+
+        game.batch.begin();
+        game.batch.draw(texture, 0, 0, 1067, 600);
+        game.batch.end();
 
         renderer.render();
 
