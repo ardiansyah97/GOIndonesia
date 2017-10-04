@@ -19,51 +19,39 @@ import com.mobcom.goindonesia.GOIndonesia;
 
 public class Hud implements Disposable{
 
-    //Scene2D.ui Stage and its own Viewport for HUD
     public Stage stage;
     private Viewport viewport;
 
-    //Mario score/time Tracking Variables
     private Integer worldTimer;
-    private boolean timeUp; // true when the world timer reaches 0
+    private boolean timeUp;
     private float timeCount;
     private static Integer score;
 
-    //Scene2D widgets
     private Label countdownLabel;
     private static Label scoreLabel;
     private Label levelLabel;
 
     public Hud(SpriteBatch sb){
-        //define our tracking variables
         worldTimer = 300;
         timeCount = 0;
         score = 0;
 
-        //setup the HUD viewport using a new camera seperate from our gamecam
-        //define our stage using that viewport and our games spritebatch
         viewport = new FitViewport(GOIndonesia.V_WIDTH, GOIndonesia.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport, sb);
 
-        //define a table used to organize our hud's labels
         Table table = new Table();
-        //Top-Align table
         table.top();
-        //make the table fill the entire stage
         table.setFillParent(true);
 
-        //define our labels using the String, and a Label style consisting of a font and color
-        countdownLabel = new Label(String.format("%03d", worldTimer), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        scoreLabel =new Label(String.format("%06d", score), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        levelLabel = new Label("1-1", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        countdownLabel = new Label(String.format("%03d", worldTimer), new Label.LabelStyle(new BitmapFont(), Color.RED));
+        scoreLabel =new Label(String.format("%06d", score), new Label.LabelStyle(new BitmapFont(), Color.RED));
+        levelLabel = new Label("1-1", new Label.LabelStyle(new BitmapFont(), Color.RED));
 
-        //add a row to our table
         table.row();
         table.add(scoreLabel).expandX().padTop(10);
         table.add(levelLabel).expandX().padTop(10);
         table.add(countdownLabel).expandX().padTop(10);
 
-        //add our table to the stage
         stage.addActor(table);
 
     }

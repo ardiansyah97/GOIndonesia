@@ -10,6 +10,7 @@ import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthoCachedTiledMapRenderer;
+import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -38,7 +39,7 @@ public class PlayScreen implements Screen {
 
     private TmxMapLoader mapLoader;
     private TiledMap map;
-    private OrthoCachedTiledMapRenderer renderer;
+    private OrthogonalTiledMapRenderer renderer;
 
     private World world;
     private Box2DDebugRenderer box2d;
@@ -55,7 +56,7 @@ public class PlayScreen implements Screen {
 
         mapLoader = new TmxMapLoader();
         map = mapLoader.load("level1.tmx");
-        renderer = new OrthoCachedTiledMapRenderer(map, 1 / GOIndonesia.PPM);
+        renderer = new OrthogonalTiledMapRenderer(map, 1 / GOIndonesia.PPM);
         gameCam.position.set(gamePort.getWorldWidth() / 2, gamePort.getWorldHeight() / 2, 0);
 
         world = new World(new Vector2(0, 0), true);

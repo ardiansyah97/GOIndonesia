@@ -76,8 +76,8 @@ public class Controller {
         Table table = new Table();
         table.left().bottom();
 
-        Image upImg = new Image(new Texture("flatDark25.png"));
-        upImg.setSize(75, 75);
+        Image upImg = new Image(new Texture("controller/atas.png"));
+        upImg.setSize(90, 50);
         upImg.addListener(new InputListener() {
 
             @Override
@@ -92,8 +92,8 @@ public class Controller {
             }
         });
 
-        Image downImg = new Image(new Texture("flatDark26.png"));
-        downImg.setSize(75, 75);
+        Image downImg = new Image(new Texture("controller/bawah.png"));
+        downImg.setSize(90, 50);
         downImg.addListener(new InputListener() {
 
             @Override
@@ -108,8 +108,8 @@ public class Controller {
             }
         });
 
-        Image rightImg = new Image(new Texture("flatDark24.png"));
-        rightImg.setSize(75, 75);
+        Image rightImg = new Image(new Texture("controller/kanan.png"));
+        rightImg.setSize(50, 90);
         rightImg.addListener(new InputListener() {
 
             @Override
@@ -124,8 +124,8 @@ public class Controller {
             }
         });
 
-        Image leftImg = new Image(new Texture("flatDark23.png"));
-        leftImg.setSize(75, 75);
+        Image leftImg = new Image(new Texture("controller/kiri.png"));
+        leftImg.setSize(50, 90);
         leftImg.addListener(new InputListener() {
 
             @Override
@@ -143,15 +143,15 @@ public class Controller {
         table.add();
         table.add(upImg).size(upImg.getWidth(), upImg.getHeight());
         table.add();
-        table.row().pad(-3,-3,-3,-3);
+        table.row().pad(-1,-1,-10,-1);
         table.add(leftImg).size(leftImg.getWidth(), leftImg.getHeight());
         table.add();
         table.add(rightImg).size(rightImg.getWidth(), rightImg.getHeight());
-        table.row().padBottom(5);
+        table.row().padBottom(15);
         table.add();
         table.add(downImg).size(downImg.getWidth(), downImg.getHeight());
         table.add();
-        table.padLeft(8);
+        table.padLeft(20);
 
         stage.addActor(table);
     }
