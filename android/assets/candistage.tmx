@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="100" height="20" tilewidth="35" tileheight="35" nextobjectid="67">
+ <properties>
+  <property name="background" value="bg_grasslands.png"/>
+ </properties>
+ <tileset firstgid="1" name="tiles" tilewidth="70" tileheight="70" spacing="2" margin="2" tilecount="156" columns="26">
+  <image source="tiles.png" width="1874" height="434"/>
+ </tileset>
+ <tileset firstgid="157" source="candi1.tsx"/>
+ <layer name="background" width="100" height="20">
+  <data encoding="base64" compression="zlib">
+   eJzl2WXMlWUcwOEDB6QRiw4paRSlW7oU1JdUUGkMpEPplG6keenu7raQFpEGUZAOQaS9mH7gg8exueHY+e+59mzn+XB+97n3bGe7IwOBwAQmMonJTGEq05jODGYyi9nMYS7zmM8CFrKIxSxhKctYzgpWsorVrGEt61jPBjayic1sITJMu7axnR3sZBe72cP37OUH9vEj+znAQQ5xmCMc5RjH+YkT/MwvnOQUv3KaM5zlHOe5wEUucZkrYdx1k1vc5g53uUcgiouoBIlGdJ4gBjGJRWziEJd4xOdJEvAUT/MMz/IcCUlEYpKQlGQkJwUpSRUlfLsykJFMZCYLWclGdl7kJXLwMq+Qk1zkJg95yUd+ClCQQhSmCEV5lWIUpwQlKUVpylCWcpSnQhh3RVCZKlSlGtWpwdu8Q01q8S7v8T61qUNd6lGfBjSkER/wIR/xMY35hCY0pRnNaUFLWtGaNrQN467OdKEr3ehOD3ryOb3oTR/60o/+DGAggxjMEIYyjOF8wQhGMorRjGEs4xhPJBOYyCQmM4WpYdw1l3nMZwELWcRilrCUZSxnBStZxWrWsJZ1rGcDG9nEZrbwJV/xNd/wLVv5jm1sZwc72cVu9oRx10EOcZgjHOUYx/mJE/zML5zkFL9ymjOc5RznucBFLnGZK/zGVa7xO9f5gxvc5Ba3ucNd7hGIGr5dMX1HLGITh7jEIz5PkoCneJpneJbnSEgiEpOEpCQjOSlISSqeJzVpSEs60vMCGchIJjKThaxkixq+XbnITR7yko/8FKAghShMEYryKsUoTglKUorSlKEs5ShPBV7jdSpSiTd4k7eIoDJVqEo1qlMjjLtqU4e61KM+DWhIIz7gQz7iYxrzCU1oSjOa04KWtKI1bWjLp3xGO9rTgY50ojNd6Eo3utODnmHcNYCBDGIwQxjKMIbzBSMYyShGM4axjGM8kUxgIpOYzBSmMo3pzGAms5jNHOYyj/ksYCGLWBzGXatZw1rWsZ4NbGQTm9nCl3zF13zDt2zlO7axnR3sZBe72cP37OUH9vEj+znAQQ5xmCMc5RjHw7jrNGc4yznOc4GLXOIyV/iNq1zjd67zBze4yS1uc4e73CMQDASiEJUg0YjOE8QgJrGITRziEo/4wfDtSkgiEpOEpCQjOSlISSqeJzVpSEs60vMCGchIJjKThaxkIzsv8hI5eJlXyEkucpOHvOQjPwXCuKs4JShJKUpThrKUozwVeI3XqUil4F//zx5U2WdVqEo1qlODt3mHmtTiXd7jfWpTh7rUoz4NaPgfut7gTd4iIvj4dTWhKc1oTgta0orWwdDnAB0860gnOtOFrnSjOz3oyef0ojd96Es/+jOAgQxiMEMYyrCH6GpDWz7lM9rRPvjwXaHW9X93jWUc44lkAhOZxORg6HOAWZ7NZg5zmcd8FrCQRSxmCUtZxnJWsJJVrGYNa1l3/zdiAxsfomsKU5nGdGYwM/jwXaHWFWqfHlXXgxPxt8AD91DnAI/7hFrX/X1aH/jnPXkUE/Ev7k+oc4DHfUKtK2mU0O/Oo9iTPwE36rq8
+  </data>
+ </layer>
+ <layer name="foreground" width="100" height="20" offsetx="0" offsety="2">
+  <data encoding="base64" compression="zlib">
+   eJztlU1KBDEQhYPxGjLHmNmLIEI24jVGGERcCZ5EXI2Coh7RhE7RZfHyJ6OL9n3weJVK/01V17RzhBBCCCGEEEIIIYT8P/ZHYxLW4Frr2R/+4NEXxUp5qvOIy3krcC29l3Ri1kj63KXSes+3bhbKIdljXEcs66VxnIVi5Jduql/JR+pu865yLlLiCiiA4+zsbFQ+cW28NK92feonP/Pz3nmOL1QueDy31kNWqol1iUVSL6lfULH1Eenvh7A13gvqj1ZrDkte29v5yW+y32a/8/j33nv8HInQIee+9+PQCh1x6flb9R/tB+p/q0+Pub5PhfrvY/456kXtv8b4La/fo39Effryd0DmXnpxqH6UvjM/JajY/mf19MOZ2OZ65rM1P6jPo++XvJ92Tn5jPtC9elWbhVpPemqH8qX5GlHtXl+qMLhp
+  </data>
+ </layer>
+ <objectgroup name="bodies">
+  <object id="28" name="environment" type="object" x="0" y="0">
+   <properties>
+    <property name="userData" value="environment"/>
+   </properties>
+   <polyline points="0,700 0,0 3496.97,0 3496.97,700"/>
+  </object>
+  <object id="56" x="-25.1795" y="490.769" width="725.179" height="69.2308"/>
+  <object id="59" x="700" y="423" width="1328" height="138"/>
+  <object id="60" x="2028" y="491" width="1476" height="72"/>
+  <object id="61" x="806" y="351.333" width="277.333" height="101.333"/>
+  <object id="63" x="2136" y="420.667" width="68.6667" height="82"/>
+  <object id="64" x="2206" y="314" width="208" height="39.3333"/>
+ </objectgroup>
+</map>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="false"
+        jar="C:\Users\Ardiansyah\.gradle\caches\modules-2\files-2.1\com.badlogicgames.gdx\gdx-freetype\1.9.6\69187cc3c8062f191df435b43671b0e5ffcbf353\gdx-freetype-1.9.6.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.1"
+        sha1="69187cc3c8062f191df435b43671b0e5ffcbf353">
+        <dex dex="F:\Kuliah\107\Mobile Computing\GOIndonesia\android\build\intermediates\pre-dexed\debug\gdx-freetype-1.9.6_882b51df6b9ac998588ec2cae7bff9edfa15ba21.jar" />
+    </item>
+
+</items>
