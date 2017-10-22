@@ -5,7 +5,6 @@ import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Manifold;
-import com.mobcom.goindonesia.scenes.Hud;
 
 /**
  * Created by Ardiansyah on 21/10/2017.
@@ -14,12 +13,12 @@ import com.mobcom.goindonesia.scenes.Hud;
 public class WorldContactListener implements ContactListener {
     @Override
     public void beginContact(Contact contact) {
-        Gdx.app.log("Begin Contact", "");
+        //Gdx.app.log("Begin Contact", "");
     }
 
     @Override
     public void endContact(Contact contact) {
-        Gdx.app.log("End Contact", "");
+        //Gdx.app.log("End Contact", "");
     }
 
     @Override

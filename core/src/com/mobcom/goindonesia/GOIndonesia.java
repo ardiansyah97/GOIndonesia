@@ -3,14 +3,11 @@ package com.mobcom.goindonesia;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.assets.AssetDescriptor;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.mobcom.goindonesia.scenes.Controller;
 import com.mobcom.goindonesia.screens.LoadingScreen;
-import com.mobcom.goindonesia.screens.PlayScreen;
 
 public class GOIndonesia extends Game {
 	public static SpriteBatch batch;
@@ -18,7 +15,7 @@ public class GOIndonesia extends Game {
 	public static final int V_HEIGHT = 512;
 	public static final float PPM = 100;
 	public OrthographicCamera cam;
-	public AssetManager assetManager;
+	public static AssetManager assetManager;
 
 	public Controller controller;
 
@@ -47,5 +44,9 @@ public class GOIndonesia extends Game {
 		batch.dispose();
 		assetManager.dispose();
 		this.getScreen().dispose();
+	}
+
+	public static AssetManager getAssetManager(){
+		return assetManager;
 	}
 }

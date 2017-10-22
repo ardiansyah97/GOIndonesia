@@ -1,6 +1,5 @@
 package com.mobcom.goindonesia.sprites;
 
-import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -19,7 +18,7 @@ import com.mobcom.goindonesia.screens.PlayScreen;
  */
 
 public class Garuda extends Sprite{
-    public enum State{FALLING, JUMPING, STANDING, RUNNING};
+    public enum State{FALLING, JUMPING, STANDING, RUNNING, DEAD};
     public State currentState;
     public State previousState;
     public World world;
@@ -77,6 +76,7 @@ public class Garuda extends Sprite{
                 break;
             case FALLING:
             case STANDING:
+            case DEAD:
             default:
                 region = garudaStand;
                 break;
@@ -100,7 +100,7 @@ public class Garuda extends Sprite{
     }
 
     public State getState(){
-        if(b2body.getLinearVelocity().y > 0 || b2body.getLinearVelocity().y < 0 && previousState == State.JUMPING)
+        if((b2body.getLinearVelocity().y > 0 && currentState == State.JUMPING) || (b2body.getLinearVelocity().y < 0 && previousState == State.JUMPING))
             return State.JUMPING;
         else if(b2body.getLinearVelocity().y < 0)
             return State.FALLING;

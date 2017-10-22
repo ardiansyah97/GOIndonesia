@@ -5,6 +5,8 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.MathUtils;
 import com.mobcom.goindonesia.GOIndonesia;
@@ -18,6 +20,7 @@ public class LoadingScreen implements Screen {
 
     private ShapeRenderer shapeRenderer;
     private float progress;
+
     public LoadingScreen(final GOIndonesia game){
         this.game = game;
         this.shapeRenderer = new ShapeRenderer();
@@ -27,17 +30,19 @@ public class LoadingScreen implements Screen {
 
     private void queueAssets(){
         game.assetManager.load("logo.png", Texture.class);
-
+        game.assetManager.load("atlas/main_character.pack", TextureAtlas.class);
+        game.assetManager.load("atlas/hud.pack", TextureAtlas.class);
+        game.assetManager.load("font/my-font.fnt", BitmapFont.class);
     }
 
     @Override
     public void show() {
-        System.out.println("LOADING");
+        System.out.println("Loading Sreen");
     }
 
     private void update(float delta) {
         progress = MathUtils.lerp(progress, game.assetManager.getProgress(), .1f);
-        //System.out.println(progress + "" + game.assets.getProgress());
+
         if(game.assetManager.update()  && progress <= game.assetManager.getProgress() - .001f){
             game.setScreen(new SplashScreen(game)); // muncul splash screen
         }
@@ -51,13 +56,10 @@ public class LoadingScreen implements Screen {
         update(delta);
 
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-        /*shapeRenderer.setColor(Color.BLACK);
-        shapeRenderer.rect(32, game.cam.viewportHeight / 2 - 8, game.cam.viewportWidth - 64, game.cam.viewportHeight / 2 + 8);*/
         shapeRenderer.setColor(Color.BLACK);
-        shapeRenderer.rect(32, game.cam.viewportHeight / 2 - 8, game.cam.viewportWidth - 64, 16); // 210
-
+        shapeRenderer.rect(256, game.cam.viewportHeight / 5 - 8, game.cam.viewportWidth / 2 - 64, 16); // 210
         shapeRenderer.setColor(Color.BLUE);
-        shapeRenderer.rect(32, game.cam.viewportHeight / 2 - 8, progress * (game.cam.viewportWidth - 64), 16);  //210
+        shapeRenderer.rect(256, game.cam.viewportHeight / 5 - 8, progress * (game.cam.viewportWidth / 2 - 64), 16);  //210
         shapeRenderer.end();
 
 

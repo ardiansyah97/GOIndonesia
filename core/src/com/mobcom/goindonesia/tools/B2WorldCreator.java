@@ -13,21 +13,26 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.Shape;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.utils.Array;
 import com.mobcom.goindonesia.GOIndonesia;
+import com.mobcom.goindonesia.screens.PlayScreen;
 
 /**
  * Created by Ardiansyah on 16/10/2017.
  */
 
 public class B2WorldCreator {
-    public B2WorldCreator(World world, TiledMap map){
+
+    public B2WorldCreator(PlayScreen screen){
+        World world = screen.getWorld();
+        TiledMap map = screen.getMap();
         BodyDef bodyDef = new BodyDef();
         PolygonShape polygonShape = new PolygonShape();
         Shape shape;
         FixtureDef fixtureDef = new FixtureDef();
         Body body;
 
-
+        //collision for diagonal
         for(MapObject object : map.getLayers().get(2).getObjects()){
             shape = getPolyline((PolylineMapObject)object);;
 
@@ -39,6 +44,7 @@ public class B2WorldCreator {
             body.createFixture(shape, 1);
         }
 
+        //collioson for rectangle
         for(MapObject object : map.getLayers().get(1).getObjects().getByType(RectangleMapObject.class)){
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
 
@@ -51,6 +57,8 @@ public class B2WorldCreator {
             fixtureDef.shape = polygonShape;
             body.createFixture(fixtureDef);
         }
+
+
     }
 
     private static ChainShape getPolyline(PolylineMapObject polylineObject) {

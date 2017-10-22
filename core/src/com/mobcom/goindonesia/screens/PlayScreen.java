@@ -14,12 +14,12 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mobcom.goindonesia.GOIndonesia;
 import com.mobcom.goindonesia.scenes.Controller;
 import com.mobcom.goindonesia.scenes.Hud;
 import com.mobcom.goindonesia.sprites.Garuda;
+import com.mobcom.goindonesia.tools.CollectibleRenderer;
 import com.mobcom.goindonesia.tools.B2WorldCreator;
 import com.mobcom.goindonesia.tools.WorldContactListener;
 
@@ -42,6 +42,7 @@ public class PlayScreen implements Screen {
 
     private World world;
     private Box2DDebugRenderer box2d;
+    private B2WorldCreator creator;
 
     private Texture texture;
 
@@ -49,11 +50,10 @@ public class PlayScreen implements Screen {
 
 
     public PlayScreen(GOIndonesia game){
-        atlas = new TextureAtlas("main_character.pack");
+        atlas = game.assetManager.get("atlas/main_character.pack");
 
         this.game = game;
-        texture = new Texture("candi.png");
-        texture = new Texture("bg_grasslands.png");
+        texture = new Texture("background/bg_grasslands.png");
         gameCam = new OrthographicCamera();
         gamePort = new FitViewport(GOIndonesia.V_WIDTH / GOIndonesia.PPM, GOIndonesia.V_HEIGHT / GOIndonesia.PPM, gameCam);
 
@@ -61,7 +61,7 @@ public class PlayScreen implements Screen {
 
 
         mapLoader = new TmxMapLoader();
-        map = mapLoader.load("level1b.tmx");
+        map = mapLoader.load("map/level1b.tmx");
         renderer = new OrthogonalTiledMapRenderer(map, 1 / GOIndonesia.PPM);
         gameCam.position.set(gamePort.getWorldWidth() / 2, gamePort.getWorldHeight() / 2, 0);
 
@@ -69,7 +69,8 @@ public class PlayScreen implements Screen {
         box2d = new Box2DDebugRenderer();
         hud = new Hud(game.batch);
 
-        new B2WorldCreator(world, map);
+        creator = new B2WorldCreator(this);
+        new CollectibleRenderer(this);
         player = new Garuda(world, this);
 
         world.setContactListener(new WorldContactListener());
@@ -85,17 +86,21 @@ public class PlayScreen implements Screen {
 
     }
 
-    public void handleInput(){
-        if(Gdx.input.isKeyJustPressed(Input.Keys.UP))
+    public void handleInput() {
+        if (Gdx.input.isKeyJustPressed(Input.Keys.UP))
             player.jump();
 
-        if(controller.isRightPressed() && player.b2body.getLinearVelocity().x <= 2)
+        if (controller.isRightPressed() && player.b2body.getLinearVelocity().x <= 2) {
             player.b2body.applyLinearImpulse(new Vector2(0.6f, 0), player.b2body.getWorldCenter(), true);
+            Hud.increaseLife(1);
+        }
 
-
-        if(controller.isLeftPressed() && player.b2body.getLinearVelocity().x >= -2)
+        if (controller.isLeftPressed() && player.b2body.getLinearVelocity().x >= -2){
             player.b2body.applyLinearImpulse(new Vector2(-0.6f, 0), player.b2body.getWorldCenter(), true);
-
+            Hud.decreaseLife(1);
+            if(Hud.getLife()==0)
+                game.setScreen(new GameOverScreen(game));
+        }
     }
 
     public void update(float dt){
@@ -106,10 +111,15 @@ public class PlayScreen implements Screen {
 
         player.update(dt);
 
-        System.out.println("x : "+player.b2body.getPosition().x+" & y : "+player.b2body.getPosition().y);
+        //System.out.println("x : "+player.b2body.getPosition().x+" & y : "+player.b2body.getPosition().y);
 
         if(player.b2body.getPosition().x > 5 && player.b2body.getPosition().x < 23)
             gameCam.position.x = player.b2body.getPosition().x;
+
+        if(player.b2body.getPosition().y <= 0) {
+            Hud.decreaseLife(100);
+            game.setScreen(new GameOverScreen(game));
+        }
 
         if(player.b2body.getPosition().y > 2.5)
             gameCam.position.y = player.b2body.getPosition().y;
@@ -118,8 +128,6 @@ public class PlayScreen implements Screen {
         gameCam.update();
         renderer.setView(gameCam);
     }
-
-
 
 
     @Override
@@ -134,7 +142,7 @@ public class PlayScreen implements Screen {
 
         renderer.render();
 
-        //box2d.render(world, gameCam.combined);
+        box2d.render(world, gameCam.combined);
 
         game.batch.setProjectionMatrix(gameCam.combined);
         game.batch.begin();
@@ -175,5 +183,17 @@ public class PlayScreen implements Screen {
         world.dispose();
         box2d.dispose();
         hud.dispose();
+    }
+
+    public World getWorld(){
+        return world;
+    }
+
+    public TiledMap getMap() {
+        return map;
+    }
+
+    public OrthographicCamera getCam(){
+        return gameCam;
     }
 }

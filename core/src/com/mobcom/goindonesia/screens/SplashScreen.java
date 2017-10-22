@@ -42,7 +42,7 @@ public class SplashScreen implements Screen {
 
     @Override
     public void show(){
-        System.out.println("SPLASH");
+        System.out.println("Splash Screen");
 
         splashImg.setPosition(stage.getWidth() / GOIndonesia.PPM + stage.getWidth() / 2 - 256 , stage.getHeight() / GOIndonesia.PPM + stage.getHeight() / 2 - 64 );
 
@@ -57,7 +57,6 @@ public class SplashScreen implements Screen {
         Timer.schedule(new Timer.Task(){
             @Override
             public void run() {
-                // Do your work
                 game.setScreen(new PlayScreen(game));
             }
         }, delay);
@@ -93,7 +92,7 @@ public class SplashScreen implements Screen {
 
     @Override
     public void hide() {
-        System.out.println("Hide");
+        System.out.println("Hide Splashscreen");
     }
 
     @Override

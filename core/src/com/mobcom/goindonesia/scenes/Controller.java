@@ -66,11 +66,8 @@ public class Controller {
 
         Gdx.input.setInputProcessor(stage);
 
-        Table table = new Table();
-        table.left().bottom();
-
         Image rightImg = new Image(new Texture("controller/kanan.png"));
-        rightImg.setSize(50, 50);
+        rightImg.setSize(75, 75);
         rightImg.addListener(new InputListener() {
 
             @Override
@@ -86,7 +83,7 @@ public class Controller {
         });
 
         Image leftImg = new Image(new Texture("controller/kiri.png"));
-        leftImg.setSize(50, 50);
+        leftImg.setSize(75, 75);
         leftImg.addListener(new InputListener() {
 
             @Override
@@ -101,12 +98,54 @@ public class Controller {
             }
         });
 
-        table.add();
-        table.add(leftImg).size(leftImg.getWidth(), leftImg.getHeight()).padRight(20);
-        table.add(rightImg).size(rightImg.getWidth(), rightImg.getHeight());
-        table.padLeft(20).padBottom(20);
+        Image jumpImg = new Image(new Texture("controller/kiri.png"));
+        jumpImg.setSize(75, 75);
+        jumpImg.addListener(new InputListener() {
 
-        stage.addActor(table);
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+//                leftPressed = true;
+                return true;
+            }
+
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+//                leftPressed = false;
+            }
+        });
+
+        Image fireImg = new Image(new Texture("controller/kiri.png"));
+        fireImg.setSize(75, 75);
+        fireImg.addListener(new InputListener() {
+
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+//                leftPressed = true;
+                return true;
+            }
+
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+//                leftPressed = false;
+            }
+        });
+
+        Table tableLeft = new Table();
+        tableLeft.left().bottom();
+        tableLeft.setFillParent(true);
+        tableLeft.add(leftImg).size(leftImg.getWidth(), leftImg.getHeight()).padRight(15);
+        tableLeft.add(rightImg).size(rightImg.getWidth(), rightImg.getHeight());
+        tableLeft.padLeft(20).padBottom(20);
+
+        Table tableRight = new Table();
+        tableRight.right().bottom();
+        tableRight.setFillParent(true);
+        tableRight.add(fireImg).size(fireImg.getWidth(), fireImg.getHeight()).padRight(15);
+        tableRight.add(jumpImg).size(jumpImg.getWidth(), jumpImg.getHeight());
+        tableRight.padRight(20).padBottom(20);
+
+        stage.addActor(tableLeft);
+        stage.addActor(tableRight);
     }
 
     public void draw(){
