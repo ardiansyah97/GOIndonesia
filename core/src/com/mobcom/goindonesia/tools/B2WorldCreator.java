@@ -1,9 +1,11 @@
 package com.mobcom.goindonesia.tools;
 
 import com.badlogic.gdx.maps.MapObject;
+import com.badlogic.gdx.maps.objects.EllipseMapObject;
 import com.badlogic.gdx.maps.objects.PolylineMapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.math.Ellipse;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -16,12 +18,18 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import com.mobcom.goindonesia.GOIndonesia;
 import com.mobcom.goindonesia.screens.PlayScreen;
+import com.mobcom.goindonesia.sprites.collectible.Coin;
+import com.mobcom.goindonesia.sprites.enemy.Barong;
+
+import java.util.ArrayList;
 
 /**
  * Created by Ardiansyah on 16/10/2017.
  */
 
 public class B2WorldCreator {
+    private Array<Barong> barongs;
+    private ArrayList<Coin> coins;
 
     public B2WorldCreator(PlayScreen screen){
         World world = screen.getWorld();
@@ -32,7 +40,7 @@ public class B2WorldCreator {
         FixtureDef fixtureDef = new FixtureDef();
         Body body;
 
-        //collision for diagonal
+        //diagonal collision
         for(MapObject object : map.getLayers().get(2).getObjects()){
             shape = getPolyline((PolylineMapObject)object);;
 
@@ -58,6 +66,19 @@ public class B2WorldCreator {
             body.createFixture(fixtureDef);
         }
 
+        //create all barongs
+        barongs = new Array<Barong>();
+        for(MapObject object : map.getLayers().get(5).getObjects().getByType(RectangleMapObject.class)){
+            Rectangle rect = ((RectangleMapObject) object).getRectangle();
+            barongs.add(new Barong(screen, rect.getX() / GOIndonesia.PPM, rect.getY() / GOIndonesia.PPM ));
+        }
+
+        //create all coins
+        coins = new ArrayList<Coin>();
+        for(MapObject object : map.getLayers().get(3).getObjects().getByType(EllipseMapObject.class)){
+            Ellipse ellips= ((EllipseMapObject) object).getEllipse();
+            coins.add(new Coin(screen, ellips.x / GOIndonesia.PPM, ellips.y / GOIndonesia.PPM));
+        }
 
     }
 
@@ -76,4 +97,11 @@ public class B2WorldCreator {
         return chain;
     }
 
+    public Array<Barong> getBarongs() {
+        return barongs;
+    }
+
+    public ArrayList<Coin> getCoins(){
+        return coins;
+    }
 }

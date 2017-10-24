@@ -11,6 +11,7 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import com.mobcom.goindonesia.GOIndonesia;
+import com.mobcom.goindonesia.scenes.Hud;
 import com.mobcom.goindonesia.screens.PlayScreen;
 
 /**
@@ -18,6 +19,7 @@ import com.mobcom.goindonesia.screens.PlayScreen;
  */
 
 public class Garuda extends Sprite{
+
     public enum State{FALLING, JUMPING, STANDING, RUNNING, DEAD};
     public State currentState;
     public State previousState;
@@ -27,15 +29,17 @@ public class Garuda extends Sprite{
 
     private Animation garudaRun;
     private Animation garudaJump;
+    private Animation garudaDead;
 
     private float stateTimer;
     private boolean runningRight;
 
+    private boolean garudaIsDead;
+    private int garudaHP;
 
-    public Garuda(World world, PlayScreen screen){
+    public Garuda(PlayScreen screen){
         super(screen.getAtlas().findRegion("g-one"));
-        this.world = world;
-
+        this.world = screen.getWorld();
 
         currentState = State.STANDING;
         previousState = State.STANDING;
@@ -49,18 +53,30 @@ public class Garuda extends Sprite{
 
         frames.add(new TextureRegion(getTexture(), 241, 0, 80, 90));
         frames.add(new TextureRegion(getTexture(), 321, 6, 80, 90));
-
         garudaJump = new Animation(0.2f, frames);
+        frames.clear();
+
+        //garuda dead animation
+
+
+
+        //
 
         garudaStand = new TextureRegion(getTexture(), 1, 6, 80, 90);
         defineGaruda();
-        setBounds(0,0, 80/GOIndonesia.PPM, 90/GOIndonesia.PPM);
+        setBounds(getX(), getY(), 80 / GOIndonesia.PPM, 90 / GOIndonesia.PPM);
         setRegion(garudaStand);
+        garudaIsDead = false;
+        garudaHP = 100;
     }
 
     public void update(float dt){
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
         setRegion(getFrame(dt));
+        if(garudaHP == 0)
+            garudaIsDead = true;
+        else
+            garudaIsDead = false;
     }
 
     public TextureRegion getFrame(float dt){
@@ -76,7 +92,10 @@ public class Garuda extends Sprite{
                 break;
             case FALLING:
             case STANDING:
+                region = garudaStand;
+                break;
             case DEAD:
+
             default:
                 region = garudaStand;
                 break;
@@ -100,7 +119,9 @@ public class Garuda extends Sprite{
     }
 
     public State getState(){
-        if((b2body.getLinearVelocity().y > 0 && currentState == State.JUMPING) || (b2body.getLinearVelocity().y < 0 && previousState == State.JUMPING))
+        if(garudaIsDead)
+            return State.DEAD;
+        else if((b2body.getLinearVelocity().y > 0 && currentState == State.JUMPING) || (b2body.getLinearVelocity().y < 0 && previousState == State.JUMPING))
             return State.JUMPING;
         else if(b2body.getLinearVelocity().y < 0)
             return State.FALLING;
@@ -112,7 +133,7 @@ public class Garuda extends Sprite{
 
     public void defineGaruda(){
         BodyDef bdef = new BodyDef();
-        bdef.position.set(2, 5);
+        bdef.position.set(0, 5);
         bdef.type = BodyDef.BodyType.DynamicBody;
         b2body = world.createBody(bdef);
 
@@ -130,5 +151,33 @@ public class Garuda extends Sprite{
             b2body.applyLinearImpulse(new Vector2(0, 5f), b2body.getWorldCenter(), true);
             currentState = State.JUMPING;
         }
+    }
+
+    public void decGarudaHP(int decHP){
+        if(garudaHP == 0) {
+            garudaHP = 0;
+        } else {
+            if(garudaHP - decHP <= 0) {
+                garudaHP = 0;
+            }else {
+                garudaHP -= decHP;
+            }
+        }
+    }
+
+    public void incGarudaHP(int incHP){
+        if(garudaHP ==100)
+            garudaHP = 100;
+        else {
+            if(garudaHP + incHP > 100) {
+                garudaHP = 100;
+            } else {
+                garudaHP += incHP;
+            }
+        }
+    }
+
+    public int getGarudaHP(){
+        return garudaHP;
     }
 }

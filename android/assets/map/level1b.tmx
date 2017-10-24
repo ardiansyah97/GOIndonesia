@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="80" height="20" tilewidth="35" tileheight="35" nextobjectid="84">
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="80" height="20" tilewidth="35" tileheight="35" nextobjectid="91">
  <properties>
   <property name="background" value="bg_grasslands.png"/>
  </properties>
@@ -31,49 +31,10 @@
   </object>
  </objectgroup>
  <objectgroup name="collectibles">
-  <object id="3" x="1295" y="388">
+  <object id="19" type="collectible" x="538.333" y="335">
    <ellipse/>
   </object>
-  <object id="4" x="1470" y="387">
-   <ellipse/>
-  </object>
-  <object id="5" x="1539" y="387">
-   <ellipse/>
-  </object>
-  <object id="6" x="2541" y="491">
-   <ellipse/>
-  </object>
-  <object id="7" x="2540" y="543">
-   <ellipse/>
-  </object>
-  <object id="8" x="2539" y="594">
-   <ellipse/>
-  </object>
-  <object id="9" x="2063" y="452">
-   <ellipse/>
-  </object>
-  <object id="10" x="2132" y="452">
-   <ellipse/>
-  </object>
-  <object id="14" x="1733" y="364">
-   <ellipse/>
-  </object>
-  <object id="15" x="1833" y="360">
-   <ellipse/>
-  </object>
-  <object id="16" x="1927" y="356">
-   <ellipse/>
-  </object>
-  <object id="17" type="collectible" x="1183" y="384">
-   <ellipse/>
-  </object>
-  <object id="18" x="1243" y="348">
-   <ellipse/>
-  </object>
-  <object id="19" type="collectible" x="1269" y="159">
-   <ellipse/>
-  </object>
-  <object id="20" x="1748" y="137">
+  <object id="90" type="collectible" x="661.333" y="384">
    <ellipse/>
   </object>
  </objectgroup>
@@ -83,6 +44,6 @@
   </data>
  </layer>
  <objectgroup name="enemy">
-  <object id="83" x="756" y="308" width="72" height="112"/>
+  <object id="89" x="1120" y="385" width="35" height="35"/>
  </objectgroup>
 </map>

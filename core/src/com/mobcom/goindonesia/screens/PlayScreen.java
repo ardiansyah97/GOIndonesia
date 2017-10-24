@@ -6,6 +6,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
@@ -18,10 +19,13 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mobcom.goindonesia.GOIndonesia;
 import com.mobcom.goindonesia.scenes.Controller;
 import com.mobcom.goindonesia.scenes.Hud;
+import com.mobcom.goindonesia.sprites.collectible.Coin;
+import com.mobcom.goindonesia.sprites.enemy.Enemy;
 import com.mobcom.goindonesia.sprites.Garuda;
-import com.mobcom.goindonesia.tools.CollectibleRenderer;
 import com.mobcom.goindonesia.tools.B2WorldCreator;
 import com.mobcom.goindonesia.tools.WorldContactListener;
+
+import java.util.Iterator;
 
 /**
  * Created by Ardiansyah on 02/10/2017.
@@ -46,7 +50,7 @@ public class PlayScreen implements Screen {
 
     private Texture texture;
 
-    public Garuda player;
+    private Garuda player;
 
 
     public PlayScreen(GOIndonesia game){
@@ -67,11 +71,11 @@ public class PlayScreen implements Screen {
 
         world = new World(new Vector2(0, -10), true);
         box2d = new Box2DDebugRenderer();
-        hud = new Hud(game.batch);
 
         creator = new B2WorldCreator(this);
-        new CollectibleRenderer(this);
-        player = new Garuda(world, this);
+        player = new Garuda(this);
+
+        hud = new Hud(this);
 
         world.setContactListener(new WorldContactListener());
 
@@ -92,13 +96,13 @@ public class PlayScreen implements Screen {
 
         if (controller.isRightPressed() && player.b2body.getLinearVelocity().x <= 2) {
             player.b2body.applyLinearImpulse(new Vector2(0.6f, 0), player.b2body.getWorldCenter(), true);
-            Hud.increaseLife(1);
+            player.incGarudaHP(1);
         }
 
         if (controller.isLeftPressed() && player.b2body.getLinearVelocity().x >= -2){
             player.b2body.applyLinearImpulse(new Vector2(-0.6f, 0), player.b2body.getWorldCenter(), true);
-            Hud.decreaseLife(1);
-            if(Hud.getLife()==0)
+            player.decGarudaHP(1);
+            if(player.getGarudaHP()==0)
                 game.setScreen(new GameOverScreen(game));
         }
     }
@@ -111,19 +115,36 @@ public class PlayScreen implements Screen {
 
         player.update(dt);
 
-        //System.out.println("x : "+player.b2body.getPosition().x+" & y : "+player.b2body.getPosition().y);
+
+        for(Coin coin : creator.getCoins()){
+            coin.update(dt);
+        }
+
+        Iterator<Coin> iter = creator.getCoins().iterator();
+        while(iter.hasNext()){
+            Coin coin = iter.next();
+            if(coin.getCollected()) {
+                iter.remove();
+                Hud.increaseCoin(1);
+            }
+        }
+
+        for(Enemy enemy : creator.getBarongs())
+            enemy.update(dt);
 
         if(player.b2body.getPosition().x > 5 && player.b2body.getPosition().x < 23)
             gameCam.position.x = player.b2body.getPosition().x;
 
         if(player.b2body.getPosition().y <= 0) {
-            Hud.decreaseLife(100);
+            player.decGarudaHP(100);
             game.setScreen(new GameOverScreen(game));
         }
 
         if(player.b2body.getPosition().y > 2.5)
             gameCam.position.y = player.b2body.getPosition().y;
 
+        //hud update
+        hud.setHudHP(player.getGarudaHP());
 
         gameCam.update();
         renderer.setView(gameCam);
@@ -146,7 +167,19 @@ public class PlayScreen implements Screen {
 
         game.batch.setProjectionMatrix(gameCam.combined);
         game.batch.begin();
+
         player.draw(game.batch);
+
+        for(Coin coin : creator.getCoins())
+            coin.draw(game.batch);
+
+        for(Enemy enemy : creator.getBarongs()) {
+            //only draw enemy in screen
+            if(Math.abs(player.getX() - enemy.getX()) < 12){
+                enemy.draw(game.batch);
+            }
+        }
+
         game.batch.end();
 
         game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
@@ -195,5 +228,13 @@ public class PlayScreen implements Screen {
 
     public OrthographicCamera getCam(){
         return gameCam;
+    }
+
+    public Garuda getPlayer(){
+        return player;
+    }
+
+    public SpriteBatch getSpriteBatch(){
+        return game.batch;
     }
 }

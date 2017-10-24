@@ -98,7 +98,7 @@ public class Controller {
             }
         });
 
-        Image jumpImg = new Image(new Texture("controller/kiri.png"));
+        Image jumpImg = new Image(new Texture("controller/jump.png"));
         jumpImg.setSize(75, 75);
         jumpImg.addListener(new InputListener() {
 
@@ -114,7 +114,7 @@ public class Controller {
             }
         });
 
-        Image fireImg = new Image(new Texture("controller/kiri.png"));
+        Image fireImg = new Image(new Texture("controller/bullet.png"));
         fireImg.setSize(75, 75);
         fireImg.addListener(new InputListener() {
 

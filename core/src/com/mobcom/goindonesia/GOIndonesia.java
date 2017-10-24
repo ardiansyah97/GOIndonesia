@@ -3,6 +3,7 @@ package com.mobcom.goindonesia;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -16,6 +17,7 @@ public class GOIndonesia extends Game {
 	public static final float PPM = 100;
 	public OrthographicCamera cam;
 	public static AssetManager assetManager;
+	public static Preferences pref;
 
 	public Controller controller;
 
@@ -28,7 +30,21 @@ public class GOIndonesia extends Game {
 		cam = new OrthographicCamera();
 		cam.setToOrtho(false, V_WIDTH, V_HEIGHT);
 
+		pref = Gdx.app.getPreferences("GOIndonesia");
+		if(!pref.contains("coins")){
+			pref.putInteger("coins", 0);
+		}
+
 		setScreen(new LoadingScreen(this));
+	}
+
+	public static void setCoins(int val){
+		pref.putInteger("coins", val);
+		pref.flush();
+	}
+
+	public static int getCoins(){
+		return pref.getInteger("coins");
 	}
 
 	@Override

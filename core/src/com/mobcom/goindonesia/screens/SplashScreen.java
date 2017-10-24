@@ -45,12 +45,12 @@ public class SplashScreen implements Screen {
         System.out.println("Splash Screen");
 
         splashImg.setPosition(stage.getWidth() / GOIndonesia.PPM + stage.getWidth() / 2 - 256 , stage.getHeight() / GOIndonesia.PPM + stage.getHeight() / 2 - 64 );
-
         splashImg.addAction(sequence(alpha(0), scaleTo(.1f, .1f),
                 parallel(fadeIn(2f, Interpolation.pow2),
                         scaleTo(1f, 1f, 2.5f, Interpolation.pow5),
                         moveTo(stage.getWidth() / GOIndonesia.PPM + stage.getWidth() / 2 - 256, stage.getHeight() / GOIndonesia.PPM + stage.getHeight() / 2 - 64, 2f, Interpolation.swing)),
                 delay(1f), fadeOut(1.25f)));
+
 
         float delay = 5; // seconds
 
@@ -60,6 +60,7 @@ public class SplashScreen implements Screen {
                 game.setScreen(new PlayScreen(game));
             }
         }, delay);
+
     }
 
 
