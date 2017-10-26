@@ -3,13 +3,12 @@
  <properties>
   <property name="background" value="bg_grasslands.png"/>
  </properties>
- <tileset firstgid="1" name="tiles" tilewidth="70" tileheight="70" spacing="2" margin="2" tilecount="156" columns="26">
-  <image source="tiles.png" width="1874" height="434"/>
- </tileset>
+ <tileset firstgid="1" source="yoi.tsx"/>
  <tileset firstgid="157" source="coin.tsx"/>
+ <tileset firstgid="158" source="untitled.tsx"/>
  <layer name="background" width="80" height="20">
   <data encoding="base64" compression="zlib">
-   eJzt1LENgDAMBMDskj2YgzodNWzA4nQUUVKAIjlS7pqXXNhfOSUAAGAmZ3QBlrY3ZtuAvbmTrOWILvDRHV2AV+93lMF3rioBZuEv/fMAHbYEYw==
+   eJzF2FPQXWcUBuB9TmzbtlO7TZXatlM3qe02tVL/sW3btm3b7nP5X/Xq7POtmeduz7zrm1mz9szKiKKoLe1oTwc60onOdKEr3ehOD3rSi970oS/96M8ABjKIwQxhKMMYzggyYsosnIiiIhSlGMUpQUlKUZoylKUc5alARSpRmSpUpRrVqUFNalGbOtSlHvUZKXcUoxnDWMYxnglMZBKTmcJUpjGdGcxkFrOZw1zmMZ8FLGQRi1nC0ii+zAbe05BGNKYJTTmHczmP87mAC7mIi7mES7mMy7mCK7mKZlzNNVzLdVxPc25gmdzlrGAlq1jNGtayjvVsYCOb2MwWtrKN7exgJ7vYzR72so/9HOAgh6L4Mm/0npu4mVu4ldu4nTu4k7u4m3u4l/u4nwd4kId4mEd4lMd4nCd4kqd4mmd4lsNyj3CUYxznBCc5xWnOcJbI9wmSZCEr2chODnKSi9zkIS/5yE8BClIoxsznaMHzvMCLvMTLvMKrvEZLWvE6b/Amb/E27/Au7/E+H/AhH/Exn/Apn/F5IszOiCvzC77kK76mNd/wLd/xPT/wIz/xM7/wK7/Rht/5gz/5i7/5h3/JoC3taE+HRJidEVdmRzrRmS50pRvd6UFPetGbPvSlH/0ZwEAGMZghDGUYwxnBSEYxmjGMTYTZGXFljmM8E5jIJCYzhalMYzozmMksZjOHucxjPgtYyCIWs4SlLGM5K1jJqkSYnRFX5mrWsJZ1rGcDG9nEZrawlW1sZwc72cVu9rCXfeznAAc5xGGOcJRjHE+E2RlxZZ7gJKc4zRnOEiX9g0iShaxkIzs5yEkucpOHvOQjPwUoSCEKU4SiFKN4MszOiCuzhPeUpBSlKUNZylGeClSkEpWpQlWqUZ0a1KQWtalDXepRnwY0pBGNaZIMszPSkZmuuQixM9KRma65CLEz0pGZrrkIsTMyZ8Z1S0jXXMTV///dXzJXXLeEdM1FiPtL5gpxv0hlhe4/xP0ilRW6/xD3i1RW6P5D3C9SWaH7D3G/SGX9B9km/No=
   </data>
  </layer>
  <objectgroup name="rectCollision">

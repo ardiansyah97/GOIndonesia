@@ -7,6 +7,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
+import com.badlogic.gdx.physics.box2d.Filter;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
@@ -148,7 +149,7 @@ public class Garuda extends Sprite{
 
     public void jump(){
         if ( currentState != State.JUMPING ) {
-            b2body.applyLinearImpulse(new Vector2(0, 5f), b2body.getWorldCenter(), true);
+            b2body.applyLinearImpulse(new Vector2(0, 6f), b2body.getWorldCenter(), true);
             currentState = State.JUMPING;
         }
     }

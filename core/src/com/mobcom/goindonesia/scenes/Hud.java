@@ -81,6 +81,7 @@ public class Hud implements Disposable{
         Table tableLeft = new Table();
         tableLeft.left().top();
         tableLeft.setFillParent(true);
+
         tableLeft.add(new Image(leftHud)).padTop(10).padLeft(10);
 
         Table tableRight= new Table();
