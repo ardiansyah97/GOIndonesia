@@ -22,14 +22,13 @@ public class Barong extends Enemy {
     public Barong(PlayScreen screen, float x, float y) {
         super(screen, x, y);
         frames = new Array<TextureRegion>();
-        for(int i = 0; i < 3; i++){
-            frames.add(new TextureRegion(screen.getAtlas().findRegion("g-one"), i*80 + 1, 6, 80,90 ));
-        }
+        frames.add(new TextureRegion(screen.getAtlas().findRegion("weapon"), 81, 85, 80,70 ));
+        frames.add(new TextureRegion(screen.getAtlas().findRegion("weapon"), 161, 85, 75,70 ));
+
         walkAnimation = new Animation(0.3f, frames);
         stateTime = 0;
-        setBounds(getX(), getY(), 80 / GOIndonesia.PPM, 90 / GOIndonesia.PPM);
+        setBounds(getX(), getY(), 80 / GOIndonesia.PPM, 70 / GOIndonesia.PPM);
     }
-
 
 
     @Override
@@ -41,11 +40,12 @@ public class Barong extends Enemy {
 
         FixtureDef fdef = new FixtureDef();
         CircleShape shape = new CircleShape();
-        shape.setRadius(40 / GOIndonesia.PPM);
+        shape.setRadius(34 / GOIndonesia.PPM);
 
+        fdef.filter.categoryBits = GOIndonesia.ENEMY_BIT;
+        fdef.filter.maskBits = GOIndonesia.GROUND_BIT | GOIndonesia.JURANG_BIT | GOIndonesia.PROJECTILE_BIT;//| GOIndonesia.GARUDA_BIT;
         fdef.shape = shape;
-        b2body.createFixture(fdef);
-        shape.dispose();
+        b2body.createFixture(fdef).setUserData(this);
     }
 
     @Override

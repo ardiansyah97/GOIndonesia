@@ -23,7 +23,6 @@ public class MainMenuScreen implements Screen {
 
     private Stage stage;
     private Viewport viewport;
-    private boolean isPlayed;
 
     private GOIndonesia game;
     private Texture texture;
@@ -36,11 +35,14 @@ public class MainMenuScreen implements Screen {
         texture = new Texture("background/bgmainmenu.png");
 
         Gdx.input.setInputProcessor(stage);
-        isPlayed = false;
 
+		Image imgSetting  = new Image(new Texture("background/setting_button.png"));
+		imgSetting.setSize(60,60);
+		
         Image imgPlay = new Image(new Texture("background/play_button.png"));
         imgPlay.setSize(80,80);
         imgPlay.addListener(new ClickListener(){
+
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 game.setScreen(new PlayScreen(game));
@@ -58,6 +60,12 @@ public class MainMenuScreen implements Screen {
         Image imgExit= new Image(new Texture("background/exit_button.png"));
         imgExit.setSize(80,80);
 
+		Table topRight = new Table();
+		topRight.right().top();
+		topRight.setFillParent(true);
+		topRight.add(imgSetting).size(imgSetting.getWidth(), imgSetting.getHeight());
+		topRight.padRight(15).padTop(15);
+		
         Table botLeft= new Table();
         botLeft.left().bottom();
         botLeft.setFillParent(true);
@@ -72,6 +80,7 @@ public class MainMenuScreen implements Screen {
         botRight.add(imgExit).size(imgExit.getWidth(), imgExit.getHeight());
         botRight.padRight(15).padBottom(15);
 
+		stage.addActor(topRight);
         stage.addActor(botLeft);
         stage.addActor(botRight);
     }
@@ -91,8 +100,6 @@ public class MainMenuScreen implements Screen {
         game.batch.end();
 
         stage.draw();
-        if(isPlayed)
-            System.out.print("CLICKED");
 
     }
 

@@ -1,0 +1,40 @@
+
+atlas-1.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+weapon
+  rotate: false
+  xy: 1, 1
+  size: 319, 254
+  orig: 319, 254
+  offset: 0, 0
+  index: -1
+enemy
+  rotate: false
+  xy: 322, 85
+  size: 218, 170
+  orig: 218, 170
+  offset: 0, 0
+  index: -1
+g-one
+  rotate: false
+  xy: 542, 178
+  size: 280, 77
+  orig: 280, 77
+  offset: 0, 0
+  index: -1
+coin
+  rotate: false
+  xy: 322, 38
+  size: 45, 45
+  orig: 45, 45
+  offset: 0, 0
+  index: -1
+bullet
+  rotate: false
+  xy: 542, 171
+  size: 14, 5
+  orig: 14, 5
+  offset: 0, 0
+  index: -1

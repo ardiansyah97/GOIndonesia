@@ -1,6 +1,7 @@
 package com.mobcom.goindonesia.sprites.collectible;
 
 
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.mobcom.goindonesia.GOIndonesia;
 import com.mobcom.goindonesia.screens.PlayScreen;
@@ -17,10 +18,10 @@ public class Coin extends Collectible {
 
     public Coin(PlayScreen screen, float x, float y) {
         super(screen, x, y);
-        textureRegion = new TextureRegion(screen.getAtlas().findRegion("g-one"), 1, 6, 80, 90);
+        textureRegion = new TextureRegion(screen.getAtlas().findRegion("coin"));
         stateTime = 0;
         isCollected = false;
-        setBounds(getX(), getY(), 80 / GOIndonesia.PPM, 90 / GOIndonesia.PPM);
+        setBounds(getX(), getY(), 45 / GOIndonesia.PPM, 45 / GOIndonesia.PPM);
     }
 
     @Override
@@ -36,12 +37,13 @@ public class Coin extends Collectible {
 
     @Override
     public boolean getCollected() {
+
         float x = screen.getPlayer().getX() - getX();
         float y = screen.getPlayer().getY() - getY();
 
-        if(Math.abs(x) < 0.5 && Math.abs(y) < 0.5) {
+        if(Math.abs(x) < 0.6 && Math.abs(y) < 0.6) {
             isCollected = true;
-            //play music
+            GOIndonesia.assetManager.get("audio/coin.wav", Sound.class).play();
         } else
             isCollected = false;
 

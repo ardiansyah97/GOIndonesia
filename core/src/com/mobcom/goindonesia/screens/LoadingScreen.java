@@ -2,6 +2,7 @@ package com.mobcom.goindonesia.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
@@ -30,9 +31,10 @@ public class LoadingScreen implements Screen {
 
     private void queueAssets(){
         game.assetManager.load("logo.png", Texture.class);
-        game.assetManager.load("atlas/main_character.pack", TextureAtlas.class);
+        game.assetManager.load("atlas/atlas-1.pack", TextureAtlas.class);
         game.assetManager.load("atlas/hud.pack", TextureAtlas.class);
         game.assetManager.load("font/my-font.fnt", BitmapFont.class);
+        game.assetManager.load("audio/coin.wav", Sound.class);
     }
 
     @Override

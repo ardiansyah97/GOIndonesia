@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="80" height="20" tilewidth="35" tileheight="35" nextobjectid="91">
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="80" height="20" tilewidth="35" tileheight="35" nextobjectid="98">
  <properties>
   <property name="background" value="bg_grasslands.png"/>
  </properties>
@@ -12,14 +12,14 @@
    eJzt1LENgDAMBMDskj2YgzodNWzA4nQUUVKAIjlS7pqXXNhfOSUAAGAmZ3QBlrY3ZtuAvbmTrOWILvDRHV2AV+93lMF3rioBZuEv/fMAHbYEYw==
   </data>
  </layer>
- <objectgroup name="rectCollision">
+ <objectgroup name="groundRectangle">
   <object id="58" x="420" y="490.667" width="287.667" height="32.3333"/>
   <object id="59" x="685.333" y="546.667"/>
   <object id="60" x="770.667" y="420" width="417.333" height="25.667"/>
   <object id="65" x="-6" y="559" width="287" height="36"/>
   <object id="79" x="1160" y="468" width="1660" height="336"/>
  </objectgroup>
- <objectgroup name="lineCollision">
+ <objectgroup name="groundDiagonal">
   <object id="76" x="0" y="-24">
    <polyline points="0,0 0,788"/>
   </object>
@@ -34,7 +34,7 @@
   <object id="19" type="collectible" x="538.333" y="324.333">
    <ellipse/>
   </object>
-  <object id="90" type="collectible" x="153.333" y="432">
+  <object id="90" type="collectible" x="635.151" y="325.939">
    <ellipse/>
   </object>
  </objectgroup>
@@ -44,6 +44,9 @@
   </data>
  </layer>
  <objectgroup name="barong">
-  <object id="89" x="1120" y="385" width="35" height="35"/>
+  <object id="89" x="204.848" y="530.455" width="35" height="35"/>
+ </objectgroup>
+ <objectgroup name="jurang">
+  <object id="95" x="272.727" y="93.9394" width="60.6061" height="660.606"/>
  </objectgroup>
 </map>

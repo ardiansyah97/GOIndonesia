@@ -11,10 +11,20 @@ import com.mobcom.goindonesia.scenes.Controller;
 import com.mobcom.goindonesia.screens.LoadingScreen;
 
 public class GOIndonesia extends Game {
-	public static SpriteBatch batch;
+	//Virtual Screen size and Box2D Scale(Pixels Per Meter)
 	public static final int V_WIDTH = 1024;
 	public static final int V_HEIGHT = 512;
 	public static final float PPM = 100;
+
+	//Box2D Collision Bits
+	public static final short GROUND_BIT = 1;
+	public static final short GARUDA_BIT = 2;
+	public static final short ENEMY_BIT = 4;
+	public static final short PROJECTILE_BIT = 8;
+	public static final short JURANG_BIT = 16;
+
+
+	public static SpriteBatch batch;
 	public OrthographicCamera cam;
 	public static AssetManager assetManager;
 	public static Preferences pref;

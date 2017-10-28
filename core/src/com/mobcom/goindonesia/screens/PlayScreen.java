@@ -22,8 +22,8 @@ import com.mobcom.goindonesia.scenes.Hud;
 import com.mobcom.goindonesia.sprites.collectible.Coin;
 import com.mobcom.goindonesia.sprites.enemy.Enemy;
 import com.mobcom.goindonesia.sprites.Garuda;
-import com.mobcom.goindonesia.tools.B2WorldCreator;
 import com.mobcom.goindonesia.tools.WorldContactListener;
+import com.mobcom.goindonesia.tools.WorldCreator;
 
 import java.util.Iterator;
 
@@ -46,15 +46,14 @@ public class PlayScreen implements Screen {
 
     private World world;
     private Box2DDebugRenderer box2d;
-    private B2WorldCreator creator;
+    private WorldCreator creator;
 
     private Texture texture;
 
     private Garuda player;
 
-
     public PlayScreen(GOIndonesia game){
-        atlas = game.assetManager.get("atlas/main_character.pack");
+        atlas = game.assetManager.get("atlas/atlas-1.pack");
 
         this.game = game;
         texture = new Texture("background/bg_grasslands.png");
@@ -65,14 +64,14 @@ public class PlayScreen implements Screen {
 
 
         mapLoader = new TmxMapLoader();
-        map = mapLoader.load("map/level1b.tmx");
+        map = mapLoader.load("map/candistage.tmx");
         renderer = new OrthogonalTiledMapRenderer(map, 1 / GOIndonesia.PPM);
         gameCam.position.set(gamePort.getWorldWidth() / 2, gamePort.getWorldHeight() / 2, 0);
 
         world = new World(new Vector2(0, -10), true);
         box2d = new Box2DDebugRenderer();
 
-        creator = new B2WorldCreator(this);
+        creator = new WorldCreator(this);
         player = new Garuda(this);
 
         hud = new Hud(this);
@@ -94,6 +93,11 @@ public class PlayScreen implements Screen {
         if (Gdx.input.isKeyJustPressed(Input.Keys.UP))
             player.jump();
 
+        if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
+            //fire
+            player.shoot();
+        }
+
         if (controller.isRightPressed() && player.b2body.getLinearVelocity().x <= 2) {
             player.b2body.applyLinearImpulse(new Vector2(0.6f, 0), player.b2body.getWorldCenter(), true);
             player.incGarudaHP(1);
@@ -109,7 +113,6 @@ public class PlayScreen implements Screen {
 
     public void update(float dt){
         handleInput();
-
 
         world.step(1/30f, 6, 2);
 
@@ -132,7 +135,7 @@ public class PlayScreen implements Screen {
         for(Enemy enemy : creator.getBarongs())
             enemy.update(dt);
 
-        if(player.b2body.getPosition().x > 5 && player.b2body.getPosition().x < 23)
+        if(player.b2body.getPosition().x > 5 && player.b2body.getPosition().x < 78.8)
             gameCam.position.x = player.b2body.getPosition().x;
 
         if(player.b2body.getPosition().y <= 0) {
@@ -168,7 +171,6 @@ public class PlayScreen implements Screen {
         game.batch.setProjectionMatrix(gameCam.combined);
         game.batch.begin();
 
-        player.draw(game.batch);
 
         for(Coin coin : creator.getCoins())
             coin.draw(game.batch);
@@ -179,6 +181,9 @@ public class PlayScreen implements Screen {
                 enemy.draw(game.batch);
             }
         }
+
+        player.draw(game.batch);
+
 
         game.batch.end();
 

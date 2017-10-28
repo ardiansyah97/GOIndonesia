@@ -6,7 +6,7 @@ repeat: none
 hud
   rotate: false
   xy: 1, 1
-  size: 737, 198
-  orig: 737, 198
+  size: 670, 180
+  orig: 670, 180
   offset: 0, 0
   index: -1

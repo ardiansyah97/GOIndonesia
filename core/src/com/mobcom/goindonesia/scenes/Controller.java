@@ -22,14 +22,17 @@ public class Controller {
 
     Viewport viewport;
     Stage stage;
-    boolean leftPressed, rightPressed, upPressed;
+    boolean leftPressed, rightPressed, upPressed, spacePressed;
     OrthographicCamera cam;
 
     public Controller(SpriteBatch sb){
         cam = new OrthographicCamera();
         viewport = new FitViewport(GOIndonesia.V_WIDTH, GOIndonesia.V_HEIGHT, cam);
         stage = new Stage(viewport, sb);
-
+        
+        float sizeWidth = 70;
+        float sizeHeight = 70;
+        
         stage.addListener(new InputListener(){
 
             @Override
@@ -40,6 +43,9 @@ public class Controller {
                         break;
                     case Input.Keys.RIGHT:
                         rightPressed = true;
+                        break;
+                    case Input.Keys.SPACE:
+                        spacePressed = true;
                         break;
                 }
                 return true;
@@ -57,6 +63,9 @@ public class Controller {
                     case Input.Keys.UP:
                         upPressed = false;
                         break;
+                    case Input.Keys.SPACE:
+                        spacePressed = false;
+                        break;
                 }
                 return true;
             }
@@ -67,7 +76,7 @@ public class Controller {
         Gdx.input.setInputProcessor(stage);
 
         Image rightImg = new Image(new Texture("controller/kanan.png"));
-        rightImg.setSize(75, 75);
+        rightImg.setSize(sizeWidth, sizeHeight);
         rightImg.addListener(new InputListener() {
 
             @Override
@@ -83,7 +92,7 @@ public class Controller {
         });
 
         Image leftImg = new Image(new Texture("controller/kiri.png"));
-        leftImg.setSize(75, 75);
+        leftImg.setSize(sizeWidth, sizeHeight);
         leftImg.addListener(new InputListener() {
 
             @Override
@@ -99,7 +108,7 @@ public class Controller {
         });
 
         Image jumpImg = new Image(new Texture("controller/jump.png"));
-        jumpImg.setSize(75, 75);
+        jumpImg.setSize(sizeWidth, sizeHeight);
         jumpImg.addListener(new InputListener() {
 
             @Override
@@ -115,18 +124,18 @@ public class Controller {
         });
 
         Image fireImg = new Image(new Texture("controller/bullet.png"));
-        fireImg.setSize(75, 75);
+        fireImg.setSize(sizeWidth, sizeHeight);
         fireImg.addListener(new InputListener() {
 
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-//                leftPressed = true;
+                spacePressed = true;
                 return true;
             }
 
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-//                leftPressed = false;
+                spacePressed = false;
             }
         });
 
@@ -162,5 +171,9 @@ public class Controller {
 
     public void resize(int width, int height){
         viewport.update(width, height);
+    }
+
+    public boolean isSpacePressed() {
+        return spacePressed;
     }
 }

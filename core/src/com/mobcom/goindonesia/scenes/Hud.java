@@ -61,22 +61,23 @@ public class Hud implements Disposable{
         style.font = GOIndonesia.getAssetManager().get("font/my-font.fnt");
 
         hpLabel = new Label(String.valueOf(worldHP), style);
-        hpLabel.setFontScale(0.8f);
+        hpLabel.setFontScale(0.7f);
 
         islandLabel = new Label(worldIsland, style);
-        islandLabel.setFontScale(0.8f);
+        islandLabel.setFontScale(0.7f);
 
         petiLabel = new Label(String.format("%02d", peti), style);
-        petiLabel.setFontScale(0.8f);
+        petiLabel.setFontScale(0.7f);
 
         weaponLabel = new Label(String.format("%02d", weapon), style);
-        weaponLabel.setFontScale(0.8f);
+        weaponLabel.setFontScale(0.7f);
 
         coinLabel = new Label(String.format("%05d", worldCoin), style);
-        coinLabel.setFontScale(0.8f);
+        coinLabel.setFontScale(0.7f);
 
-        leftHud = new TextureRegion(atlas.findRegion("hud").getTexture(), 1 , 63*2+1, 145,63);
-        rightHud = new TextureRegion(atlas.findRegion("hud").getTexture(), 150, 10, 580,63);
+        leftHud = new TextureRegion(atlas.findRegion("hud").getTexture(), 1 , 57*2+1, 140,57);
+        rightHud = new TextureRegion(atlas.findRegion("hud").getTexture(), 150, 10, 500,57);
+
 
         Table tableLeft = new Table();
         tableLeft.left().top();
@@ -89,30 +90,32 @@ public class Hud implements Disposable{
         tableRight.setFillParent(true);
         tableRight.add(new Image(rightHud)).padTop(10);
 
+        float padTop = 28;
+
         Table tableLife = new Table();
         tableLife.left().top();
         tableLife.setFillParent(true);
-        tableLife.add(hpLabel).padTop(30).padLeft(95);
+        tableLife.add(hpLabel).padTop(padTop).padLeft(85);
 
         Table tableIsland = new Table();
         tableIsland.top();
         tableIsland.setFillParent(true);
-        tableIsland.add(islandLabel).padTop(30).padLeft(75);
+        tableIsland.add(islandLabel).padTop(padTop).padLeft(165);
 
         Table tablePeti = new Table();
         tablePeti.top();
         tablePeti.setFillParent(true);
-        tablePeti.add(petiLabel).padTop(30).padLeft(445);
+        tablePeti.add(petiLabel).padTop(padTop).padLeft(525);
 
         Table tableWeapon= new Table();
         tableWeapon.right().top();
         tableWeapon.setFillParent(true);
-        tableWeapon.add(weaponLabel).padTop(30).padRight(160);
+        tableWeapon.add(weaponLabel).padTop(padTop).padRight(135);
 
         Table tableCoin= new Table();
         tableCoin.right().top();
         tableCoin.setFillParent(true);
-        tableCoin.add(coinLabel).padTop(30).padRight(10);
+        tableCoin.add(coinLabel).padTop(padTop).padRight(5);
 
         stage.addActor(tableLeft);
         stage.addActor(tableRight);
@@ -127,11 +130,11 @@ public class Hud implements Disposable{
     public void setHudHP(int HP){
         hpLabel.setText(String.valueOf(HP));
         if(HP >=65)
-            leftHud.setRegion(new TextureRegion(atlas.findRegion("hud").getTexture(), 1 , 63*2+1, 145,63));
+            leftHud.setRegion(new TextureRegion(atlas.findRegion("hud").getTexture(), 1 , 57*2+1, 140,57));
         else if(HP >=30)
-            leftHud.setRegion(new TextureRegion(atlas.findRegion("hud").getTexture(), 1 , 63+1, 145,63));
+            leftHud.setRegion(new TextureRegion(atlas.findRegion("hud").getTexture(), 1 , 57+1, 140,57));
         else
-            leftHud.setRegion(new TextureRegion(atlas.findRegion("hud").getTexture(), 1 , 1, 145,63));
+            leftHud.setRegion(new TextureRegion(atlas.findRegion("hud").getTexture(), 1 , 1, 140,57));
     }
 
     public static void increaseCoin(int incCoin){
