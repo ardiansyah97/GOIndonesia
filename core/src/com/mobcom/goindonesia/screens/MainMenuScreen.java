@@ -38,7 +38,7 @@ public class MainMenuScreen implements Screen {
 
 		Image imgSetting  = new Image(new Texture("background/setting_button.png"));
 		imgSetting.setSize(60,60);
-		
+
         Image imgPlay = new Image(new Texture("background/play_button.png"));
         imgPlay.setSize(80,80);
         imgPlay.addListener(new ClickListener(){
@@ -53,6 +53,7 @@ public class MainMenuScreen implements Screen {
 
         Image imgShop = new Image(new Texture("background/shop_button.png"));
         imgShop.setSize(80,80);
+
 
         Image imgAbout = new Image(new Texture("background/about_button.png"));
         imgAbout.setSize(80,80);

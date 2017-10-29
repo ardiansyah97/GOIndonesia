@@ -100,7 +100,7 @@ public class Hud implements Disposable{
         Table tableIsland = new Table();
         tableIsland.top();
         tableIsland.setFillParent(true);
-        tableIsland.add(islandLabel).padTop(padTop).padLeft(165);
+        tableIsland.add(islandLabel).padTop(padTop).padLeft(175);
 
         Table tablePeti = new Table();
         tablePeti.top();
@@ -138,7 +138,7 @@ public class Hud implements Disposable{
     }
 
     public static void increaseCoin(int incCoin){
-        worldCoin++;
+        worldCoin += incCoin;
         coinLabel.setText(String.format("%05d", worldCoin));
         GOIndonesia.setCoins(worldCoin);
     }

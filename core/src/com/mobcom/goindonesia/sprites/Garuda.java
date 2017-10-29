@@ -91,12 +91,13 @@ public class Garuda extends Sprite{
         else
             garudaIsDead = false;
 
-
         for(Projectile  projectile : projectiles) {
             projectile.update(dt);
             if(projectile.isDestroyed())
                 projectiles.removeValue(projectile, true);
         }
+
+        //System.out.println(projectiles.size);
 
     }
 

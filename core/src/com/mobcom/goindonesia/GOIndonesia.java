@@ -21,7 +21,6 @@ public class GOIndonesia extends Game {
 	public static final short GARUDA_BIT = 2;
 	public static final short ENEMY_BIT = 4;
 	public static final short PROJECTILE_BIT = 8;
-	public static final short JURANG_BIT = 16;
 
 
 	public static SpriteBatch batch;

@@ -49,7 +49,7 @@ public class WorldCreator {
             fixtureDef.filter.categoryBits = GOIndonesia.GROUND_BIT;
             fixtureDef.shape = shape;
 
-            body.createFixture(shape, 1);
+            body.createFixture(shape, 1).setUserData(this);
         }
 
         //rectangle collioson
@@ -69,7 +69,7 @@ public class WorldCreator {
 
             fixtureDef.filter.categoryBits = GOIndonesia.GROUND_BIT;
             fixtureDef.shape = polygonShape;
-            body.createFixture(fixtureDef);
+            body.createFixture(fixtureDef).setUserData(this);
         }
 
         //jurang collision

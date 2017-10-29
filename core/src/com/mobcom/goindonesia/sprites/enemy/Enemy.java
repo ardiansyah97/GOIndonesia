@@ -23,4 +23,7 @@ public abstract class Enemy extends Sprite {
 
     protected abstract void defineEnemy();
     public abstract void update(float dt);
+    public abstract boolean isDead();
+    public abstract void setEnemyHP(int dmg);
+    public abstract int getEnemyHp();
 }

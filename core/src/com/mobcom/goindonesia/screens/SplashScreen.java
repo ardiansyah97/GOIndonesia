@@ -27,32 +27,52 @@ import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
 public class SplashScreen implements Screen {
     private GOIndonesia game;
     private Stage stage;
-    private Image splashImg;
+    private Image splashImgStudio, splashImgGame;
 
     public SplashScreen(final GOIndonesia game){
         this.game = game;
         this.stage = new Stage(new StretchViewport(GOIndonesia.V_WIDTH, GOIndonesia.V_HEIGHT, game.cam));
         Gdx.input.setInputProcessor(stage);
 
-        Texture splashTex = game.assetManager.get("logo.png", Texture.class);
-        splashImg = new Image(splashTex);
-        splashImg.setOrigin(splashImg.getWidth() / 2, splashImg.getHeight() / 2);
-        stage.addActor(splashImg);
+        Texture splashTexStudio = game.assetManager.get("logo_studio.png", Texture.class);
+        Texture splashTexGame = game.assetManager.get("logo_game.jpeg", Texture.class);
+
+        splashImgGame = new Image(splashTexGame);
+        splashImgGame.setOrigin(splashImgGame.getWidth() / 2, splashImgGame.getHeight() / 2);
+
+        splashImgStudio = new Image(splashTexStudio);
+        splashImgStudio.setOrigin(splashImgStudio.getWidth() / 2, splashImgStudio.getHeight() / 2);
+
+        stage.addActor(splashImgStudio);
     }
 
     @Override
     public void show(){
         System.out.println("Splash Screen");
 
-        splashImg.setPosition(stage.getWidth() / GOIndonesia.PPM + stage.getWidth() / 2 - 256 , stage.getHeight() / GOIndonesia.PPM + stage.getHeight() / 2 - 64 );
-        splashImg.addAction(sequence(alpha(0), scaleTo(.1f, .1f),
+        splashImgStudio.setPosition(stage.getWidth() / GOIndonesia.PPM , stage.getHeight() / GOIndonesia.PPM );
+        splashImgStudio.addAction(sequence(alpha(0), scaleTo(.1f, .1f),
                 parallel(fadeIn(2f, Interpolation.pow2),
                         scaleTo(1f, 1f, 2.5f, Interpolation.pow5),
-                        moveTo(stage.getWidth() / GOIndonesia.PPM + stage.getWidth() / 2 - 256, stage.getHeight() / GOIndonesia.PPM + stage.getHeight() / 2 - 64, 2f, Interpolation.swing)),
+                        moveTo(stage.getWidth() / GOIndonesia.PPM, stage.getHeight() / GOIndonesia.PPM , 2f, Interpolation.swing)),
                 delay(1f), fadeOut(1.25f)));
 
+        float delay1 = 5;
 
-        float delay = 5; // seconds
+        Timer.schedule(new Timer.Task(){
+            @Override
+            public void run() {
+                stage.addActor(splashImgGame);
+                splashImgGame.setPosition(stage.getWidth() / GOIndonesia.PPM , stage.getHeight() / GOIndonesia.PPM );
+                splashImgGame.addAction(sequence(alpha(0), scaleTo(.1f, .1f),
+                        parallel(fadeIn(2f, Interpolation.pow2),
+                                scaleTo(1f, 1f, 2.5f, Interpolation.pow5),
+                                moveTo(stage.getWidth() / GOIndonesia.PPM, stage.getHeight() / GOIndonesia.PPM , 2f, Interpolation.swing)),
+                        delay(1f), fadeOut(1.25f)));
+            }
+        }, delay1);
+
+        float delay = 10; // seconds
 
         Timer.schedule(new Timer.Task(){
             @Override

@@ -20,6 +20,7 @@ import com.mobcom.goindonesia.GOIndonesia;
 import com.mobcom.goindonesia.scenes.Controller;
 import com.mobcom.goindonesia.scenes.Hud;
 import com.mobcom.goindonesia.sprites.collectible.Coin;
+import com.mobcom.goindonesia.sprites.enemy.Barong;
 import com.mobcom.goindonesia.sprites.enemy.Enemy;
 import com.mobcom.goindonesia.sprites.Garuda;
 import com.mobcom.goindonesia.tools.WorldContactListener;
@@ -56,7 +57,7 @@ public class PlayScreen implements Screen {
         atlas = game.assetManager.get("atlas/atlas-1.pack");
 
         this.game = game;
-        texture = new Texture("background/bg_grasslands.png");
+        texture = new Texture("background/bg_candi.png");
         gameCam = new OrthographicCamera();
         gamePort = new FitViewport(GOIndonesia.V_WIDTH / GOIndonesia.PPM, GOIndonesia.V_HEIGHT / GOIndonesia.PPM, gameCam);
 
@@ -132,8 +133,11 @@ public class PlayScreen implements Screen {
             }
         }
 
-        for(Enemy enemy : creator.getBarongs())
-            enemy.update(dt);
+        for(Barong barong: creator.getBarongs()){
+            barong.update(dt);
+            if(barong.isDead())
+                creator.getBarongs().removeValue(barong, true);
+        }
 
         if(player.b2body.getPosition().x > 5 && player.b2body.getPosition().x < 78.8)
             gameCam.position.x = player.b2body.getPosition().x;

@@ -30,7 +30,8 @@ public class LoadingScreen implements Screen {
     }
 
     private void queueAssets(){
-        game.assetManager.load("logo.png", Texture.class);
+        game.assetManager.load("logo_studio.png", Texture.class);
+        game.assetManager.load("logo_game.jpeg", Texture.class);
         game.assetManager.load("atlas/atlas-1.pack", TextureAtlas.class);
         game.assetManager.load("atlas/hud.pack", TextureAtlas.class);
         game.assetManager.load("font/my-font.fnt", BitmapFont.class);
