@@ -18,10 +18,13 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import com.mobcom.goindonesia.GOIndonesia;
 import com.mobcom.goindonesia.screens.PlayScreen;
+import com.mobcom.goindonesia.sprites.collectible.Chest;
 import com.mobcom.goindonesia.sprites.collectible.Coin;
+import com.mobcom.goindonesia.sprites.collectible.Health;
 import com.mobcom.goindonesia.sprites.enemy.Barong;
 
 import java.util.ArrayList;
+
 
 /**
  * Created by Ardiansyah on 16/10/2017.
@@ -30,6 +33,8 @@ import java.util.ArrayList;
 public class WorldCreator {
     private Array<Barong> barongs;
     private ArrayList<Coin> coins;
+    private ArrayList<Health> healts;
+    private ArrayList<Chest> chests;
 
     public WorldCreator(PlayScreen screen){
         World world = screen.getWorld();
@@ -106,6 +111,23 @@ public class WorldCreator {
             coins.add(new Coin(screen, ellips.x / GOIndonesia.PPM, ellips.y / GOIndonesia.PPM));
         }
 
+        //create all box
+        chests = new ArrayList<Chest>();
+        for(MapObject object : map.getLayers().get("box").getObjects().getByType(EllipseMapObject.class)){
+            Ellipse ellips= ((EllipseMapObject) object).getEllipse();
+            chests.add(new Chest(screen, ellips.x / GOIndonesia.PPM, ellips.y / GOIndonesia.PPM));
+        }
+
+
+        //create all blood
+        healts = new ArrayList<Health>();
+        for(MapObject object : map.getLayers().get("blood").getObjects().getByType(EllipseMapObject.class)){
+            Ellipse ellips= ((EllipseMapObject) object).getEllipse();
+            healts.add(new Health(screen, ellips.x / GOIndonesia.PPM, ellips.y / GOIndonesia.PPM));
+        }
+
+
+
     }
 
     private static ChainShape getPolyline(PolylineMapObject polylineObject) {
@@ -129,5 +151,13 @@ public class WorldCreator {
 
     public ArrayList<Coin> getCoins(){
         return coins;
+    }
+
+    public  ArrayList<Health> getHealth() {
+        return healts;
+    }
+
+    public ArrayList<Chest> getChest(){
+        return chests;
     }
 }

@@ -43,7 +43,7 @@ public class Coin extends Collectible {
 
         if(Math.abs(x) < 0.6 && Math.abs(y) < 0.6) {
             isCollected = true;
-            GOIndonesia.assetManager.get("audio/coin.wav", Sound.class).play();
+            GOIndonesia.assetManager.get("audio/s_coin.wav", Sound.class).play();
         } else
             isCollected = false;
 

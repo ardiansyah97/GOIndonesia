@@ -1,5 +1,6 @@
 package com.mobcom.goindonesia.sprites;
 
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -183,6 +184,7 @@ public class Garuda extends Sprite{
 
     public void shoot(){
         projectiles.add(new Projectile(screen, b2body.getPosition().x, b2body.getPosition().y, runningRight ? true : false));
+        GOIndonesia.assetManager.get("audio/s_pistol.wav", Sound.class).play();
     }
 
     public void draw(Batch batch){

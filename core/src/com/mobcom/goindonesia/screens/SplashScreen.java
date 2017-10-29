@@ -35,7 +35,7 @@ public class SplashScreen implements Screen {
         Gdx.input.setInputProcessor(stage);
 
         Texture splashTexStudio = game.assetManager.get("logo_studio.png", Texture.class);
-        Texture splashTexGame = game.assetManager.get("logo_game.jpeg", Texture.class);
+        Texture splashTexGame = game.assetManager.get("logo_game.png", Texture.class);
 
         splashImgGame = new Image(splashTexGame);
         splashImgGame.setOrigin(splashImgGame.getWidth() / 2, splashImgGame.getHeight() / 2);
@@ -63,16 +63,12 @@ public class SplashScreen implements Screen {
             @Override
             public void run() {
                 stage.addActor(splashImgGame);
-                splashImgGame.setPosition(stage.getWidth() / GOIndonesia.PPM , stage.getHeight() / GOIndonesia.PPM );
-                splashImgGame.addAction(sequence(alpha(0), scaleTo(.1f, .1f),
-                        parallel(fadeIn(2f, Interpolation.pow2),
-                                scaleTo(1f, 1f, 2.5f, Interpolation.pow5),
-                                moveTo(stage.getWidth() / GOIndonesia.PPM, stage.getHeight() / GOIndonesia.PPM , 2f, Interpolation.swing)),
-                        delay(1f), fadeOut(1.25f)));
+                splashImgGame.setPosition(stage.getWidth() / GOIndonesia.PPM + 340, stage.getHeight() / GOIndonesia.PPM + 108);
+                //splashImgGame.addAction(sequence(alpha(1), scaleTo(.1f, .1f), fadeOut(2f)));
             }
         }, delay1);
 
-        float delay = 10; // seconds
+        float delay = 8; // seconds
 
         Timer.schedule(new Timer.Task(){
             @Override

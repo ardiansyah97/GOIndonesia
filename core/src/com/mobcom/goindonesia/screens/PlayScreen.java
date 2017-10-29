@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
@@ -19,7 +20,9 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mobcom.goindonesia.GOIndonesia;
 import com.mobcom.goindonesia.scenes.Controller;
 import com.mobcom.goindonesia.scenes.Hud;
+import com.mobcom.goindonesia.sprites.collectible.Chest;
 import com.mobcom.goindonesia.sprites.collectible.Coin;
+import com.mobcom.goindonesia.sprites.collectible.Health;
 import com.mobcom.goindonesia.sprites.enemy.Barong;
 import com.mobcom.goindonesia.sprites.enemy.Enemy;
 import com.mobcom.goindonesia.sprites.Garuda;
@@ -35,6 +38,7 @@ import java.util.Iterator;
 public class PlayScreen implements Screen {
     private GOIndonesia game;
     private TextureAtlas atlas;
+    private TextureAtlas atlas2;
 
     private OrthographicCamera gameCam;
     private Viewport gamePort;
@@ -55,9 +59,10 @@ public class PlayScreen implements Screen {
 
     public PlayScreen(GOIndonesia game){
         atlas = game.assetManager.get("atlas/atlas-1.pack");
+        atlas2 = game.assetManager.get("atlas/atlas-2.pack");
 
         this.game = game;
-        texture = new Texture("background/bg_candi.png");
+        texture = new Texture("background/bg_candi3.png");
         gameCam = new OrthographicCamera();
         gamePort = new FitViewport(GOIndonesia.V_WIDTH / GOIndonesia.PPM, GOIndonesia.V_HEIGHT / GOIndonesia.PPM, gameCam);
 
@@ -83,6 +88,10 @@ public class PlayScreen implements Screen {
 
     public TextureAtlas getAtlas(){
         return atlas;
+    }
+
+    public TextureAtlas getAtlas2(){
+        return atlas2;
     }
 
     @Override
@@ -124,12 +133,29 @@ public class PlayScreen implements Screen {
             coin.update(dt);
         }
 
+        for(Health health : creator.getHealth()){
+            health.update(dt);
+        }
+
+        for(Chest chest : creator.getChest()){
+            chest.update(dt);
+        }
+
         Iterator<Coin> iter = creator.getCoins().iterator();
         while(iter.hasNext()){
             Coin coin = iter.next();
             if(coin.getCollected()) {
                 iter.remove();
                 Hud.increaseCoin(1);
+            }
+        }
+
+        Iterator<Health> iter2 = creator.getHealth().iterator();
+        while(iter2.hasNext()){
+            Health health = iter2.next();
+            if(health.getCollected()) {
+                iter2.remove();
+                player.incGarudaHP(20);
             }
         }
 
@@ -170,7 +196,7 @@ public class PlayScreen implements Screen {
 
         renderer.render();
 
-        box2d.render(world, gameCam.combined);
+        //box2d.render(world, gameCam.combined);
 
         game.batch.setProjectionMatrix(gameCam.combined);
         game.batch.begin();
@@ -178,6 +204,12 @@ public class PlayScreen implements Screen {
 
         for(Coin coin : creator.getCoins())
             coin.draw(game.batch);
+
+        for(Chest chest : creator.getChest())
+            chest.draw(game.batch);
+
+        for(Health health : creator.getHealth())
+            health.draw(game.batch);
 
         for(Enemy enemy : creator.getBarongs()) {
             //only draw enemy in screen

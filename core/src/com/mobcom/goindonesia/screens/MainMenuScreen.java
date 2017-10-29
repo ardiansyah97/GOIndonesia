@@ -2,6 +2,7 @@ package com.mobcom.goindonesia.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -45,7 +46,7 @@ public class MainMenuScreen implements Screen {
 
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                game.setScreen(new PlayScreen(game));
+                game.setScreen(new MapScreen(game));
                 return true;
             }
         });
@@ -53,7 +54,6 @@ public class MainMenuScreen implements Screen {
 
         Image imgShop = new Image(new Texture("background/shop_button.png"));
         imgShop.setSize(80,80);
-
 
         Image imgAbout = new Image(new Texture("background/about_button.png"));
         imgAbout.setSize(80,80);

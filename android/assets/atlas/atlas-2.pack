@@ -1,0 +1,19 @@
+
+atlas-2.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+chest
+  rotate: false
+  xy: 1, 1
+  size: 72, 60
+  orig: 72, 60
+  offset: 0, 0
+  index: -1
+medic
+  rotate: false
+  xy: 75, 14
+  size: 55, 47
+  orig: 55, 47
+  offset: 0, 0
+  index: -1
