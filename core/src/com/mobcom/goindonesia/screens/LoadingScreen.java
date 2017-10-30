@@ -2,6 +2,7 @@ package com.mobcom.goindonesia.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
@@ -42,6 +43,20 @@ public class LoadingScreen implements Screen {
         game.assetManager.load("audio/coin.wav", Sound.class);
         game.assetManager.load("audio/s_coin.wav", Sound.class);
         game.assetManager.load("audio/s_pistol.wav", Sound.class);
+        game.assetManager.load("audio/s_splash.wav", Sound.class);
+        game.assetManager.load("audio/s_death.mp3", Sound.class);
+        game.assetManager.load("audio/s_death1.wav", Sound.class);
+        game.assetManager.load("audio/s_death2.wav", Sound.class);
+        game.assetManager.load("audio/s_death3.wav", Sound.class);
+        game.assetManager.load("audio/s_button.wav", Sound.class);
+        game.assetManager.load("audio/s_button2.wav", Sound.class);
+
+        game.assetManager.load("audio/s_candi.wav", Music.class);
+        game.assetManager.load("audio/s_menu.wav", Music.class);
+        game.assetManager.load("audio/s_jawa.wav", Music.class);
+        game.assetManager.load("audio/s_menu.wav", Music.class);
+        game.assetManager.load("audio/s_map.wav", Music.class);
+        game.assetManager.load("audio/music.ogg", Music.class);
     }
 
     @Override

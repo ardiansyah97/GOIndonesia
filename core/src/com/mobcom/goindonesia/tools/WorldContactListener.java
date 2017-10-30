@@ -26,21 +26,18 @@ public class WorldContactListener implements ContactListener {
             case GOIndonesia.ENEMY_BIT | GOIndonesia.GARUDA_BIT:
                 System.out.println("Enemy and Garuda");
                 break;
+
             case GOIndonesia.PROJECTILE_BIT | GOIndonesia.ENEMY_BIT:
                 System.out.println("Projectile and Enemy");
                 if(fixA.getFilterData().categoryBits == GOIndonesia.PROJECTILE_BIT) {
                     ((Projectile) fixA.getUserData()).setToDestroy();
-
                     ((Enemy) fixB.getUserData()).setEnemyHP(((Projectile)fixA.getUserData()).getDamage());
-
-
                 }else {
                     ((Projectile) fixB.getUserData()).setToDestroy();
-
                     ((Enemy) fixA.getUserData()).setEnemyHP(((Projectile)fixB.getUserData()).getDamage());
-
                 }
                 break;
+
             case GOIndonesia.PROJECTILE_BIT | GOIndonesia.GROUND_BIT:
                 System.out.println("Projectile and Ground");
                 break;

@@ -2,6 +2,8 @@ package com.mobcom.goindonesia.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -24,9 +26,9 @@ public class MainMenuScreen implements Screen {
 
     private Stage stage;
     private Viewport viewport;
-
     private GOIndonesia game;
     private Texture texture;
+    private Music music;
 
     public MainMenuScreen(final GOIndonesia game){
         this.game = game;
@@ -35,7 +37,13 @@ public class MainMenuScreen implements Screen {
         stage = new Stage(viewport, game.batch);
         texture = new Texture("background/bgmainmenu.png");
 
+
         Gdx.input.setInputProcessor(stage);
+
+        music = GOIndonesia.assetManager.get("audio/s_menu.wav", Music.class);
+        music.setLooping(true);
+        music.setVolume(0.3f);
+        music.play();
 
 		Image imgSetting  = new Image(new Texture("background/setting_button.png"));
 		imgSetting.setSize(60,60);
@@ -46,6 +54,7 @@ public class MainMenuScreen implements Screen {
 
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                GOIndonesia.assetManager.get("audio/s_button.wav", Sound.class).play();
                 game.setScreen(new MapScreen(game));
                 return true;
             }
@@ -126,6 +135,5 @@ public class MainMenuScreen implements Screen {
 
     @Override
     public void dispose() {
-
     }
 }

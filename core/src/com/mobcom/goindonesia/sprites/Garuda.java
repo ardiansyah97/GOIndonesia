@@ -1,5 +1,6 @@
 package com.mobcom.goindonesia.sprites;
 
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -14,10 +15,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import com.mobcom.goindonesia.GOIndonesia;
 import com.mobcom.goindonesia.screens.PlayScreen;
-import com.mobcom.goindonesia.sprites.enemy.Barong;
 import com.mobcom.goindonesia.sprites.other.Projectile;
-
-import java.util.ArrayList;
 
 /**
  * Created by Ardiansyah on 03/10/2017.
@@ -39,8 +37,7 @@ public class Garuda extends Sprite{
     private float stateTimer;
     private boolean runningRight;
 
-
-    private boolean garudaIsDead;
+    private boolean die;
     private int garudaHP;
 
     private PlayScreen screen;
@@ -77,7 +74,8 @@ public class Garuda extends Sprite{
         defineGaruda();
         setBounds(getX(), getY(), 80 / GOIndonesia.PPM, 70 / GOIndonesia.PPM);
         setRegion(garudaStand);
-        garudaIsDead = false;
+        die = false;
+        stateTimer = 0;
         garudaHP = 100;
 
         projectiles = new Array<Projectile>();
@@ -88,9 +86,9 @@ public class Garuda extends Sprite{
         setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
         setRegion(getFrame(dt));
         if(garudaHP == 0)
-            garudaIsDead = true;
+            die = true;
         else
-            garudaIsDead = false;
+            die = false;
 
         for(Projectile  projectile : projectiles) {
             projectile.update(dt);
@@ -107,6 +105,7 @@ public class Garuda extends Sprite{
 
         TextureRegion region;
         switch(currentState){
+            case DEAD:
             case JUMPING:
                 region = (TextureRegion) garudaJump.getKeyFrame(stateTimer);
                 setBounds(getX(), getY(), 80 / GOIndonesia.PPM, 80 / GOIndonesia.PPM);
@@ -120,7 +119,6 @@ public class Garuda extends Sprite{
                 region = garudaStand;
                 setBounds(getX(), getY(), 80 / GOIndonesia.PPM, 70 / GOIndonesia.PPM);
                 break;
-            case DEAD:
 
             default:
                 region = garudaStand;
@@ -140,13 +138,14 @@ public class Garuda extends Sprite{
 
         stateTimer = currentState == previousState ? stateTimer + dt : 0;
 
+        System.out.println(stateTimer);
         previousState = currentState;
 
         return region;
     }
 
     public State getState(){
-        if(garudaIsDead)
+        if(die)
             return State.DEAD;
         else if((b2body.getLinearVelocity().y > 0 && currentState == State.JUMPING) || (b2body.getLinearVelocity().y < 0 && previousState == State.JUMPING))
             return State.JUMPING;
@@ -199,6 +198,7 @@ public class Garuda extends Sprite{
         } else {
             if(garudaHP - decHP <= 0) {
                 garudaHP = 0;
+                setToDie();
             }else {
                 garudaHP -= decHP;
             }
@@ -219,5 +219,23 @@ public class Garuda extends Sprite{
 
     public int getGarudaHP(){
         return garudaHP;
+    }
+
+    public void setToDie(){
+        die = true;
+    }
+
+    public boolean isDie(){
+        return die;
+    }
+
+    public void die(){
+        GOIndonesia.assetManager.get("audio/s_candi.wav", Music.class).stop();
+        GOIndonesia.assetManager.get("audio/s_death2.wav", Sound.class).play();
+    }
+
+    public float getStateTimer() {
+        System.out.print(stateTimer);
+        return stateTimer;
     }
 }

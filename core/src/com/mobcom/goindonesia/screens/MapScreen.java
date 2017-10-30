@@ -2,6 +2,8 @@ package com.mobcom.goindonesia.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -25,6 +27,7 @@ public class MapScreen implements Screen {
     private  Texture texture;
     private Viewport viewport;
     private Stage stage;
+    private Music music;
 
     public MapScreen(final GOIndonesia game) {
         this.game = game;
@@ -34,11 +37,20 @@ public class MapScreen implements Screen {
 
         Gdx.input.setInputProcessor(stage);
 
+        GOIndonesia.assetManager.get("audio/s_menu.wav", Music.class).stop();
+
+        music = GOIndonesia.assetManager.get("audio/s_map.wav", Music.class);
+        music.setLooping(true);
+        music.setVolume(0.3f);
+        music.play();
+
+
         Image keyJawa  = new Image(new Texture("background/lock_open.png"));
         keyJawa.setSize(35,40);
         keyJawa.addListener(new InputListener(){
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                GOIndonesia.assetManager.get("audio/s_button.wav", Sound.class).play();
                 game.setScreen(new PlayScreen(game));
                 return true;
             }
@@ -49,6 +61,7 @@ public class MapScreen implements Screen {
         imgBack.addListener(new InputListener(){
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                GOIndonesia.assetManager.get("audio/s_button.wav", Sound.class).play();
                 game.setScreen(new MainMenuScreen(game));
                 return true;
             }
@@ -108,6 +121,5 @@ public class MapScreen implements Screen {
 
     @Override
     public void dispose() {
-
     }
 }

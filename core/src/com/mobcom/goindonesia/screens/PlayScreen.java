@@ -3,12 +3,12 @@ package com.mobcom.goindonesia.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
@@ -54,6 +54,7 @@ public class PlayScreen implements Screen {
     private WorldCreator creator;
 
     private Texture texture;
+    private Music music;
 
     private Garuda player;
 
@@ -68,6 +69,8 @@ public class PlayScreen implements Screen {
 
         controller = new Controller(game.batch);
 
+        game.assetManager.get("audio/s_map.wav", Music.class).stop();
+
 
         mapLoader = new TmxMapLoader();
         map = mapLoader.load("map/candistage.tmx");
@@ -81,6 +84,11 @@ public class PlayScreen implements Screen {
         player = new Garuda(this);
 
         hud = new Hud(this);
+
+        music = GOIndonesia.assetManager.get("audio/s_candi.wav", Music.class);
+        music.setLooping(true);
+        music.setVolume(0.2f);
+        music.play();
 
         world.setContactListener(new WorldContactListener());
 
@@ -116,8 +124,9 @@ public class PlayScreen implements Screen {
         if (controller.isLeftPressed() && player.b2body.getLinearVelocity().x >= -2){
             player.b2body.applyLinearImpulse(new Vector2(-0.6f, 0), player.b2body.getWorldCenter(), true);
             player.decGarudaHP(1);
-            if(player.getGarudaHP()==0)
-                game.setScreen(new GameOverScreen(game));
+            if(player.isDie()) {
+                player.die();
+            }
         }
     }
 
@@ -170,7 +179,9 @@ public class PlayScreen implements Screen {
 
         if(player.b2body.getPosition().y <= 0) {
             player.decGarudaHP(100);
-            game.setScreen(new GameOverScreen(game));
+            if(player.isDie()) {
+                player.die();
+            }
         }
 
         if(player.b2body.getPosition().y > 2.5)
@@ -196,7 +207,7 @@ public class PlayScreen implements Screen {
 
         renderer.render();
 
-        //box2d.render(world, gameCam.combined);
+        box2d.render(world, gameCam.combined);
 
         game.batch.setProjectionMatrix(gameCam.combined);
         game.batch.begin();
@@ -226,6 +237,18 @@ public class PlayScreen implements Screen {
         game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
         hud.stage.draw();
         controller.draw();
+
+        if(gameOver()){
+            game.setScreen(new GameOverScreen(game));
+            dispose();
+        }
+    }
+
+    public boolean gameOver(){
+        //statetimernya harus sesuai sama panjang soundnya
+        if(player.getState() == Garuda.State.DEAD && player.getStateTimer() > 0.3f)
+            return true;
+        return false;
     }
 
     @Override
