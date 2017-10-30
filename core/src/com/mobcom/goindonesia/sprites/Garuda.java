@@ -235,7 +235,6 @@ public class Garuda extends Sprite{
     }
 
     public float getStateTimer() {
-        System.out.print(stateTimer);
         return stateTimer;
     }
 }

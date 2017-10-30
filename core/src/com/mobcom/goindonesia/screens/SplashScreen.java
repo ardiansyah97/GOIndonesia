@@ -37,8 +37,8 @@ public class SplashScreen implements Screen {
 
         GOIndonesia.assetManager.get("audio/s_splash.wav", Sound.class).play();
 
-        Texture splashTexStudio = game.assetManager.get("logo_studio.png", Texture.class);
-        Texture splashTexGame = game.assetManager.get("logo_game.png", Texture.class);
+        Texture splashTexStudio = game.assetManager.get("logo/logo_studio.png", Texture.class);
+        Texture splashTexGame = game.assetManager.get("logo/logo_game5.png", Texture.class);
 
         splashImgGame = new Image(splashTexGame);
         splashImgGame.setOrigin(splashImgGame.getWidth() / 2, splashImgGame.getHeight() / 2);
@@ -55,11 +55,11 @@ public class SplashScreen implements Screen {
     public void show(){
         System.out.println("Splash Screen");
 
-        splashImgStudio.setPosition(stage.getWidth() / GOIndonesia.PPM , stage.getHeight() / GOIndonesia.PPM );
+        splashImgStudio.setPosition(stage.getWidth() / GOIndonesia.PPM - 50, stage.getHeight() / GOIndonesia.PPM );
         splashImgStudio.addAction(sequence(alpha(0), scaleTo(.1f, .1f),
                 parallel(fadeIn(2f, Interpolation.pow2),
                         scaleTo(1f, 1f, 2.5f, Interpolation.pow5),
-                        moveTo(stage.getWidth() / GOIndonesia.PPM, stage.getHeight() / GOIndonesia.PPM , 2f, Interpolation.swing)),
+                        moveTo(stage.getWidth() / GOIndonesia.PPM - 50, stage.getHeight() / GOIndonesia.PPM , 2f, Interpolation.swing)),
                 delay(1f), fadeOut(1f)));
 
         float delay1 = 5;
@@ -72,12 +72,12 @@ public class SplashScreen implements Screen {
             }
         }, delay1);
 
-        splashImgGame.setPosition(stage.getWidth() / GOIndonesia.PPM + 330, stage.getHeight() / GOIndonesia.PPM + 108);
+        splashImgGame.setPosition(stage.getWidth() / GOIndonesia.PPM + 250, stage.getHeight() / GOIndonesia.PPM );
         //splashImgGame.setPosition(stage.getWidth() / GOIndonesia.PPM , stage.getHeight() / GOIndonesia.PPM );
         splashImgGame.addAction(sequence(delay(5f), alpha(0), scaleTo(.1f, .1f),
                 parallel(fadeIn(2f, Interpolation.pow2),
-                        scaleTo(1f, 1f, 2.5f, Interpolation.pow5),
-                        moveTo(stage.getWidth() / GOIndonesia.PPM + 330, stage.getHeight() / GOIndonesia.PPM + 108, 2f, Interpolation.swing)),
+                        scaleTo(0.75f, 0.75f, 2.5f, Interpolation.pow5),
+                        moveTo(stage.getWidth() / GOIndonesia.PPM + 250, stage.getHeight() / GOIndonesia.PPM, 2f, Interpolation.swing)),
                 delay(1f), fadeOut(1.25f)));
 
         float delay = 10; // seconds
